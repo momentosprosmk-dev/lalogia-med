@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal - La Logia</title>
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+  <header>
+    <img src="img/index_logo.jpg" alt="Logo Iluminati" class="logo-img" />
+  </header>
+
+
+  <!--=============== Botones ===============-->
+  <div class="recuadro">
+    <a id="btn-arquitectura" class="bt-opc">explorar templo</a>
+    <a id="btn-barra" class="bt-opc">Ofertas</a>
+    <a id="btn-eventos" class="bt-opc">Rituales</a>
+    <a id="btn-momentos" class="bt-opc">Momentos</a>
+    <a id="btn-wifi" class="bt-opc">Wi-Fi</a>
+    <a id="btn-opinion" class="bt-opc">Tu opinión</a>
+    <a id="btn-contacto" class="bt-opc">Contacto</a>
+    <!-- <a id="btn-sitioweb" class="bt-opc">Sitio web</a>-->
+  </div>
+
+
+  <!--=============== Pie de página ===============-->
+  <footer class="footer">
+    <div class="footer-content">
+      <p id="texto-footer">© La Logia</p>
+    </div>
+  </footer>
+
+
+  <!--=============== Banners ===============-->
+
+  <!-- Banner - Bienvenida arquitectura -->
+  <div id="banner-arquitectura" class="bn-arq">
+    <div class="bn-arq-content">
+      <h2 id="mensaje-arquitectura" class="msg-arq"></h2>
+      <div class="botones-horizontal">
+        <a href="arquitectura/p1/p1.html" class="btn-arq">Primer Piso</a>
+        <a href="arquitectura/p2/p2.html" class="btn-arq">Segundo Piso</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Banner - Wi-Fi -->
+  <div id="banner-wifi" class="bn-wifi">
+    <div class="bn-wifi-content">
+      <h2 class="bn-wifi-titulo">ESCANEA PARA CONECTARTE</h2>
+      <img src="img/wifi/wifi.jpg" alt="Código QR WiFi" class="qr-img" />
+      <button id="cerrar-wifi" class="btn-bn-cerrar">Cerrar</button>
+    </div>
+  </div>
+
+
+  <!-- Banner - Contacto -->
+  <div id="contacto-banner" class="contacto-banner">
+    <div class="contacto-content">
+      <h2 class="contacto-titulo">CONTACTO</h2>
+      <a id="btn-whatsapp" target="_blank" class="contacto-btn">WhatsApp</a>
+      <a id="btn-instagram" target="_blank" class="contacto-btn">Instagram</a>
+      <a id="btn-facebook" target="_blank" class="contacto-btn">Facebook</a>
+      <a id="btn-expresate" target="_blank" class="contacto-btn">Exprésate</a>
+      <button id="cerrar-contacto" class="btn-contacto-cerrar">Cerrar</button>
+    </div>
+  </div>
+
+  
+  <!--=============== Scripts ===============-->
+  <script src="data/footer.js" defer></script>
+  <script src="data/links.js" defer></script>
+  <script src="data/arquitectura/bienvenida.js" defer></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const bn_arquitectura = document.getElementById("banner-arquitectura");
+      const bn_arquitectura_msg = document.getElementById("mensaje-arquitectura");
+      const bn_wifi = document.getElementById("banner-wifi");
+      const cerrarQr = document.getElementById("cerrar-wifi");
+      const contactoBanner = document.getElementById("contacto-banner");
+      const cerrarContacto = document.getElementById("cerrar-contacto");
+
+      // Mostrar - Banner Wi-Fi
+      document.getElementById("btn-wifi")?.addEventListener("click", () => {
+        bn_wifi.classList.add("visible");
+      });
+
+      // Cerrar - Banner Wi-Fi
+      cerrarQr?.addEventListener("click", () => {
+        bn_wifi.classList.remove("visible");
+      });
+
+      // Mostrar - Banner contacto
+      document.getElementById("btn-contacto")?.addEventListener("click", () => {
+        contactoBanner.classList.add("visible");
+      });
+
+      // Cerrar - Banner contacto
+      cerrarContacto?.addEventListener("click", () => {
+        contactoBanner.classList.remove("visible");
+      });
+
+      // Mostrar - Banner arquitectura
+      document.getElementById("btn-arquitectura")?.addEventListener("click", () => {
+        bn_arquitectura_msg.innerHTML = typeof generarBienvenida === "function"
+          ? generarBienvenida()
+          : "Bienvenido al templo.";
+        bn_arquitectura.classList.add("visible");
+      });
+
+      // Cierre táctil fuera del contenido
+      bn_arquitectura.addEventListener("click", (e) => {
+        if (!e.target.closest(".bn-arq-content")) {
+          bn_arquitectura.classList.remove("visible");
+        }
+      });
+
+      [bn_wifi, contactoBanner].forEach(banner => {
+        banner.addEventListener("click", (e) => {
+          if (!e.target.closest(".qr-content")) {
+            banner.classList.remove("visible");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

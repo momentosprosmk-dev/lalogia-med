@@ -1,0 +1,385 @@
+:root {
+  /* Colores institucionales */
+  --color-negro: #000;
+  --color-gris-oscuro: #1a1a1a;
+  --color-rojo: #990000;
+  --color-rojo-brillante: #cc0000;
+  --color-texto-claro: #f2f2f2;
+
+  /* Sombras */
+  --sombra-rojo: 0 0 20px rgba(153, 0, 0, 0.4);
+  --sombra-negra: 0 4px 10px rgba(0, 0, 0, 0.4);
+
+  /* Bordes */
+  --borde-rojo: 2px solid var(--color-rojo-brillante);
+  --borde-banner: 2px solid var(--color-rojo);
+
+  /* Tipografía */
+  --fuente-principal: 'Arial', sans-serif;
+  --tamaño-titulo: 1.4rem;
+  --tamaño-boton: 1rem;
+}
+
+
+/*=============== Reset global ===============*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+/*=============== Fondo y tipografía general ===============*/
+body {
+  margin: 0;
+  padding-top: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--fuente-principal);
+  color: var(--color-texto-claro);
+  line-height: 1.6;
+  background: url('../img/index.jpg') center/cover no-repeat;
+}
+
+
+/*=============== Encabezado ===============*/
+/* Encabezado */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  margin-top: 5px;
+}
+/* Logo encabezado */
+.logo-img {
+  max-width: 80vw;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(255, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+
+/*=============== Recuadro de opciones ===============*/
+.recuadro {
+  width: 90%;
+  max-width: 600px;
+  min-width: 280px;
+  margin-top: 10px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+  border-radius: 12px;
+  text-align: center;
+  font-size: 0.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+
+/*=============== Botones ===============*/
+/* Botones - Opciones del portal */
+.bt-opc {
+  display: inline-block;
+  width: 100%;
+  min-width: 120px;
+  max-width: 500px;
+  margin: 4px auto;
+  padding: 20px 30px;
+  background-color: #111;
+  color: #fff;
+  border: 2px solid #e60000;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 6px 10px rgba(255, 0, 0, 0.3);
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+.bt-opc:hover {
+  background-color: #222;
+  border-color: #ff1a1a;
+  transform: scale(1.03);
+}
+
+
+/*=============== Banner - Arquitectura ===============*/
+/* Banner arquitectura */
+.bn-arq {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  overflow-y: auto;
+  background: url('../img/arquitectura/arquitectura.jpg') center/cover no-repeat;
+}
+.bn-arq.visible {
+  display: flex;
+}
+/* Contenedor interno */
+.bn-arq-content {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  border-radius: 12px;
+  border: 2px solid #b8860b;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: fadeInScale 0.5s ease-out;
+}
+/* Título del mensaje */
+.msg-arq {
+  color: #fdf6e3;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+/* Botones verticales */
+.botones-horizontal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 10px;
+}
+/* Botones dorados compactos */
+.btn-arq {
+  background-color: #d4af37;
+  color: #1e1e1e;
+  border: 1px solid #b8860b;
+  padding: 6px 12px;
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+
+  border-radius: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 0 4px rgba(212, 175, 55, 0.3);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+  max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-arq:hover {
+  background-color: #e0c060;
+  transform: scale(1.03);
+}
+
+
+
+/*=============== Banner - Wi-Fi ===============*/
+/* Banner Wi-Fi */
+.bn-wifi {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+.bn-wifi.visible {
+  display: flex;
+}
+/* Contenedor interno */
+.bn-wifi-content {
+  background-color: var(--color-gris-oscuro);
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  border-radius: 12px;
+  border: var(--borde-banner);
+  box-shadow: var(--sombra-rojo);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: fadeInScale 0.5s ease-out;
+}
+/* Título */
+.bn-wifi-titulo {
+  color: var(--color-texto-claro);
+  font-size: var(--tamaño-titulo);
+  text-align: center;
+  margin-bottom: 10px;
+}
+/* Imagen QR */
+.qr-img {
+  max-width: 80vw;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: var(--sombra-rojo);
+}
+/* Botón de cierre */
+.btn-bn-cerrar {
+  background-color: var(--color-rojo);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: var(--tamaño-boton);
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: var(--sombra-rojo);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.btn-bn-cerrar:hover {
+  background-color: #b30000;
+  transform: scale(1.05);
+}
+
+
+/*=============== Banner - Contacto ===============*/
+/* Banner Contacto */
+.contacto-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+.contacto-banner.visible {
+  display: flex;
+}
+/* Contenedor interno */
+.contacto-content {
+  background-color: var(--color-gris-oscuro);
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  border-radius: 12px;
+  border: var(--borde-banner);
+  box-shadow: var(--sombra-rojo);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: fadeInScale 0.5s ease-out;
+}
+
+/* Título */
+.contacto-titulo {
+  color: var(--color-texto-claro);
+  font-size: var(--tamaño-titulo);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Botones de contacto */
+.contacto-btn {
+  background-color: var(--color-gris-oscuro);
+  color: #fff;
+  border: var(--borde-rojo);
+  padding: 12px 24px;
+  font-size: var(--tamaño-boton);
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: var(--sombra-negra);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+  max-width: 240px;
+}
+
+.contacto-btn:hover {
+  background-color: #2a2a2a;
+  transform: scale(1.03);
+}
+
+/* Botón de cierre */
+.btn-contacto-cerrar {
+  background-color: var(--color-rojo);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: var(--tamaño-boton);
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: var(--sombra-rojo);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-contacto-cerrar:hover {
+  background-color: #b30000;
+  transform: scale(1.05);
+}
+
+
+/*=============== Pie de página ===============*/
+.footer {
+  width: 100%;
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--color-texto-claro);
+  padding: 10px 0;
+  text-align: center;
+  font-size: 14px;
+  font-family: var(--fuente-principal);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.footer-content p {
+  margin: 1px 0;
+}
+
+
+/*=============== Animación de entrada ===============*/
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/*=============== Breakpoints ===============*/
+@media (min-width: 768px) {
+  .recuadro {
+    width: 70%;
+    max-width: 800px;
+  }
+  .button {
+    flex: 1 1 40%;
+    max-width: 45%;
+  }
+}
