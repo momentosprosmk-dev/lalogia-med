@@ -59,7 +59,7 @@ html, body {
   text-overflow: ellipsis;
   background-color: #444;
   color: #fdf6e3;
-  border: 2px solid #990000;
+  border: 2px solid #6e1f1f;
   font-size: 0.85rem;
   text-transform: uppercase;
   text-decoration: none;
@@ -85,17 +85,17 @@ html, body {
 /* Contenedor externo del banner */
 .banner-fotos {
   position: fixed;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 95vw;
-  height: 68vh;
+  height: 74vh;
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 999;
-  background: url('../../img/arquitectura/arquitectura.jpg') center/cover no-repeat;
+  background: url('../../media/arquitectura/arquitectura.jpg') center/cover no-repeat;
   border: 2px solid #b8860b;
   border-radius: 12px;
   box-shadow:

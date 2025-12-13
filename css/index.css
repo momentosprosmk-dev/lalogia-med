@@ -38,7 +38,7 @@ body {
   font-family: var(--fuente-principal);
   color: var(--color-texto-claro);
   line-height: 1.6;
-  background: url('../img/index.jpg') center/cover no-repeat;
+  background: url('../media/index.jpg') center/cover no-repeat;
 }
 
 
@@ -126,7 +126,7 @@ header {
   align-items: center;
   z-index: 999;
   overflow-y: auto;
-  background: url('../img/arquitectura/arquitectura.jpg') center/cover no-repeat;
+  background: url('../media/arquitectura/arquitectura.jpg') center/cover no-repeat;
 }
 .bn-arq.visible {
   display: flex;
@@ -150,7 +150,7 @@ header {
 /* Título del mensaje */
 .msg-arq {
   color: #fdf6e3;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: center;
   margin-bottom: 10px;
 }
@@ -204,7 +204,6 @@ header {
   justify-content: center;
   align-items: center;
   z-index: 999;
-  overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.85);
 }
 .bn-wifi.visible {
@@ -212,6 +211,7 @@ header {
 }
 /* Contenedor interno */
 .bn-wifi-content {
+  margin-top: -60px;
   background-color: var(--color-gris-oscuro);
   padding: 24px;
   width: 90%;

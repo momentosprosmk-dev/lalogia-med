@@ -1,79 +1,82 @@
+/*=============== Estilos generales ===============*/
 :root {
   --color-fondo: #111;
   --color-texto: #fff;
   --color-dorado: #CFAF3C;
-  --sombra-roja: rgba(255, 0, 0, 0.3);
-  --color-rojo: #B00000;
-  --color-rojo-claro: #ff4d4d;
+  --sombra-granate: rgba(110, 31, 31, 0.4);
+  --color-granate: #6e1f1f;
+  --color-granate-hover: #822626;
 }
 
+
+/*=============== Fondo y tipografía general ===============*/
 body {
   margin: 0;
   padding: 0;
   background-color: var(--color-fondo);
   font-family: Arial, sans-serif;
   color: var(--color-texto);
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  scrollbar-width: none;
 }
 
-body::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
 
+/*=============== Contenedor Web ===============*/
+/* Contenedor principal */
 .contenedor {
   width: 100%;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 50px);
   background-color: rgba(255, 255, 255, 0.05);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
-
-.visor {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
+/* Iframe web */
+.visor,
 iframe.visor {
+  flex: 1;
   width: 100%;
   height: 100%;
   border: none;
   display: block;
-  scrollbar-width: none;
+  overflow: hidden;
 }
-
 iframe.visor::-webkit-scrollbar {
   display: none;
 }
 
-/*=============== Botón flotante de cierre ===============*/
-.boton-cerrar {
+
+/*=============== Footer fijo ===============*/
+/* Contenedor de footer */
+.footer-fijo {
   position: fixed;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 6px 16px;
-  background-color: var(--color-rojo);
-  color: #fff;
-  border: 2px solid var(--color-rojo-claro);
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.6);
+}
+/* Botón regresar */
+.btn-regresar {
+  background: #222;
+  color: var(--color-granate);
+  padding: 8px 16px;
   border-radius: 6px;
-  font-size: 16px;
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
   text-decoration: none;
-  box-shadow: 0 3px 6px var(--sombra-roja);
-  z-index: 1000;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: 2px solid var(--color-granate);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
 }
-
-.boton-cerrar:hover {
-  background-color: var(--color-rojo-claro);
-  transform: translateX(-50%) scale(1.05);
+.btn-regresar:hover {
+  background: var(--color-granate);
+  color: #fff;
+  transform: scale(1.05);
 }

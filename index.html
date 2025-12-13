@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal - La Logia</title>
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="media/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="css/index.css" />
 </head>
 <body>
   <header>
-    <img src="img/index_logo.jpg" alt="Logo Iluminati" class="logo-img" />
+    <img src="media/index_logo.jpg" alt="Logo Iluminati" class="logo-img" />
   </header>
 
 
@@ -22,6 +22,7 @@
     <a id="btn-wifi" class="bt-opc">Wi-Fi</a>
     <a id="btn-opinion" class="bt-opc">Tu opinión</a>
     <a id="btn-contacto" class="bt-opc">Contacto</a>
+    <a id="btn-qrweb" class="bt-opc">Compartir Web</a>
     <!-- <a id="btn-sitioweb" class="bt-opc">Sitio web</a>-->
   </div>
 
@@ -50,8 +51,8 @@
   <!-- Banner - Wi-Fi -->
   <div id="banner-wifi" class="bn-wifi">
     <div class="bn-wifi-content">
-      <h2 class="bn-wifi-titulo">ESCANEA PARA CONECTARTE</h2>
-      <img src="img/wifi/wifi.jpg" alt="Código QR WiFi" class="qr-img" />
+      <h2 class="bn-wifi-titulo">CONECTATE</h2>
+      <img src="media/wifi/wifi.jpg" alt="Código QR WiFi" class="qr-img" />
       <button id="cerrar-wifi" class="btn-bn-cerrar">Cerrar</button>
     </div>
   </div>
@@ -69,6 +70,14 @@
     </div>
   </div>
 
+  <!-- Banner - QR qrweb -->
+  <div id="qrweb-banner" class="bn-wifi">
+    <div class="bn-wifi-content">
+      <h2 class="bn-wifi-titulo">COMPARTIR WEB</h2>
+      <img src="media/index_qr.jpg" alt="Código QR qrweb" class="qr-img" />
+      <button id="cerrar-qrweb" class="btn-bn-cerrar">Cerrar</button>
+    </div>
+  </div>
   
   <!--=============== Scripts ===============-->
   <script src="data/footer.js" defer></script>
@@ -83,6 +92,8 @@
       const cerrarQr = document.getElementById("cerrar-wifi");
       const contactoBanner = document.getElementById("contacto-banner");
       const cerrarContacto = document.getElementById("cerrar-contacto");
+      const qrwebBanner = document.getElementById("qrweb-banner");
+      const cerrarQrweb = document.getElementById("cerrar-qrweb");
 
       // Mostrar - Banner Wi-Fi
       document.getElementById("btn-wifi")?.addEventListener("click", () => {
@@ -104,6 +115,16 @@
         contactoBanner.classList.remove("visible");
       });
 
+      // Mostrar - Banner QR Web
+      document.getElementById("btn-qrweb")?.addEventListener("click", () => {
+        qrwebBanner.classList.add("visible");
+      });
+
+      // Cerrar - Banner QR Web
+      cerrarQrweb?.addEventListener("click", () => {
+        qrwebBanner.classList.remove("visible");
+      });
+
       // Mostrar - Banner arquitectura
       document.getElementById("btn-arquitectura")?.addEventListener("click", () => {
         bn_arquitectura_msg.innerHTML = typeof generarBienvenida === "function"
@@ -119,7 +140,7 @@
         }
       });
 
-      [bn_wifi, contactoBanner].forEach(banner => {
+      [bn_wifi, contactoBanner, qrwebBanner].forEach(banner => {
         banner.addEventListener("click", (e) => {
           if (!e.target.closest(".qr-content")) {
             banner.classList.remove("visible");
