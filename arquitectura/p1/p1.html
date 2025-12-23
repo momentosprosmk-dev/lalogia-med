@@ -454,7 +454,7 @@
   <!-- Script para generar tabla y botones -->
   <script src="estructura.js"></script>
 
-  <!-- Script genérico para carruseles y banners -->
+<!-- Script genérico para carruseles y banners -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       // Carruseles
@@ -500,6 +500,18 @@
         document.getElementById(id).classList.remove("visible");
         document.getElementById("banner-overlay").classList.remove("visible");
       };
+
+      // Vincular botones "Reservar" con el formulario
+      document.querySelectorAll(".reservar-banner").forEach(boton => {
+        boton.addEventListener("click", () => {
+          const banner = boton.closest(".banner-fotos");
+          const titulo = banner.querySelector(".titulo-banner").textContent;
+          // Guardar el título en localStorage para que lo lea el formulario
+          localStorage.setItem("zonaSeleccionada", titulo);
+          // Redirigir al formulario
+          window.open("../../formularios/reservar.html", "_blank");
+        });
+      });
     });
   </script>
 

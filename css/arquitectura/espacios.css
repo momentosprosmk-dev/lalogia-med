@@ -101,9 +101,9 @@
 
 /* Baño primer piso */
 .cu-bphm a {
-  background-color: #a6c9ec;
-  border: 1px solid #a6c9ec;
-  color: #000;
+  background-color: #555555;
+  border: 1px solid #555555;
+  color: #FFF;
   font-size: clamp(0.78rem, 2vw, 18px);
 }
 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservas - La Logia</title>
+  <link rel="icon" href="../media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="../css/formularios/reservar.css" />
+</head>
+<body>
+  <h2>Formulario de Reserva</h2>
+  <form id="reservaForm">
+    <p id="zonaSeleccionada"></p>
+
+    <label>Nombre completo:</label>
+    <input type="text" id="nombre" required><br><br>
+
+    <label>Teléfono de contacto:</label>
+    <input type="text" id="contacto" required><br><br>
+
+    <label>Número de personas:</label>
+    <input type="number" id="personas" required><br><br>
+
+    <label>Licor de preferencia:</label>
+    <input type="text" id="licor"><br><br>
+
+    <label>¿Cumpleaños?:</label>
+    <select id="cumple">
+      <option value="No">No</option>
+      <option value="Sí">Sí</option>
+    </select><br><br>
+
+    <!-- Nuevo campo de fecha -->
+    <label>Fecha de la reserva:</label>
+    <input type="date" id="fecha" required><br><br>
+
+    <button type="submit">Solicitar reserva</button>
+  </form>
+
+  <script>
+    // Leer zona desde localStorage (guardada por el botón Reservar del banner)
+    const zona = localStorage.getItem("zonaSeleccionada") || "Zona no especificada";
+
+    // Mostrar la zona en el formulario
+    document.getElementById("zonaSeleccionada").textContent = "Zona seleccionada: " + zona;
+
+    const numeroLocal = "573011529382";
+
+    document.getElementById("reservaForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const nombre = document.getElementById("nombre").value;
+      const contacto = document.getElementById("contacto").value;
+      const personas = document.getElementById("personas").value;
+      const licor = document.getElementById("licor").value;
+      const cumple = document.getElementById("cumple").value;
+      const fecha = document.getElementById("fecha").value;
+
+      const mensaje = `Hola, quiero reservar ${zona}.%0A%0A Nombre: ${nombre}%0A Contacto: ${contacto}%0A Número de personas: ${personas}%0A Licor de preferencia: ${licor}%0A Cumpleaños: ${cumple}%0A Fecha: ${fecha}`;
+
+      window.open(`https://wa.me/${numeroLocal}?text=${mensaje}`, "_blank");
+    });
+  </script>
+</body>
+</html>

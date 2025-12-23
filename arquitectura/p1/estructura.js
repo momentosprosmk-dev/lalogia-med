@@ -1040,13 +1040,6 @@ crearRellenoEstructural({
 });
 
 
-
-
-
-
-
-
-
 //=============== Baños ===============
 
 // Baños Hombres
@@ -1086,7 +1079,7 @@ window.addEventListener('load', () => {
 
   const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
   polygon.setAttribute("points", `${xC},${yC} ${xD},${yD} ${xB},${yB} ${xA},${yA}`);
-  polygon.setAttribute("fill", "#a6c9ec");
+  polygon.setAttribute("fill", "#555555");
   polygon.setAttribute("opacity", "1");
   svg.appendChild(polygon);
 });

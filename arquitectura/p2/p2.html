@@ -499,6 +499,18 @@
         document.getElementById(id).classList.remove("visible");
         document.getElementById("banner-overlay").classList.remove("visible");
       };
+
+      // Vncular botones "Reservar" con el formulario
+      document.querySelectorAll(".reservar-banner").forEach(boton => {
+        boton.addEventListener("click", () => {
+          const banner = boton.closest(".banner-fotos");
+          const titulo = banner.querySelector(".titulo-banner").textContent;
+          // Guardar el título en localStorage para que lo lea el formulario
+          localStorage.setItem("zonaSeleccionada", titulo);
+          // Abrir el formulario en una nueva pestaña/ventana
+          window.open("../../formularios/reservar.html", "_blank");
+        });
+      });
     });
   </script>
 
