@@ -1,0 +1,164 @@
+/*=============== Fondo y tipografía general ===============*/
+html, body {
+  height: 100%;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #000;
+  margin: 0;
+  padding: 0;
+  color: #f4f4f4;
+}
+
+/* Encabezado fijo */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #d62828;
+  background: #000;
+  z-index: 1000;
+}
+header h1 {
+  color: #d62828;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.1;
+}
+
+/*=============== Contenedor con scroll ===============*/
+.menu,
+.imagenes-scroll {
+  position: fixed;
+  top: 60px;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Scroll personalizado */
+.menu::-webkit-scrollbar,
+.imagenes-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+.menu::-webkit-scrollbar-track,
+.imagenes-scroll::-webkit-scrollbar-track {
+  background: #111;
+}
+.menu::-webkit-scrollbar-thumb,
+.imagenes-scroll::-webkit-scrollbar-thumb {
+  background: #6e1f1f;
+  border-radius: 5px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+.menu::-webkit-scrollbar-thumb:hover,
+.imagenes-scroll::-webkit-scrollbar-thumb:hover {
+  background: #822626;
+}
+
+/* Wrapper interno */
+.menu-inner,
+.imagenes-carta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: stretch;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/*=============== Footer fijo ===============*/
+.footer-fijo {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.6);
+}
+.btn-regresar {
+  background: #222;
+  color: #d62828;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid #d62828;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.btn-regresar:hover {
+  background: #d62828;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/*=============== Responsive ===============*/
+@media (max-width: 768px) {
+  .imagen-normal,
+  .zoom-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .imagen-normal,
+  .zoom-container {
+    width: 100%;
+  }
+  .zoom-container {
+    max-height: 60vh;
+  }
+}
+
+/* Imagen normal */
+.imagen-normal {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Contenedor con scroll para zoom */
+.zoom-container {
+  width: 100%;
+  max-height: 75vh;
+  overflow: hidden; /* sin scroll por defecto */
+}
+
+/* Imagen con zoom (estado normal) */
+.imagen-zoom {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+  transform: none;
+}
+
+/* Estado ampliado con doble clic/doble toque */
+.imagen-zoom.zoomed {
+  transform: scale(2);
+  cursor: grab;
+}
+
+/* Cuando hay zoom, permitir scroll en ambas direcciones */
+.zoom-container:has(.imagen-zoom.zoomed) {
+  overflow-x: auto;
+  overflow-y: auto;
+}

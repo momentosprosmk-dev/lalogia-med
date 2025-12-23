@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  <title>Ofertas - Carta</title>
+  <link rel="icon" href="../../img/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./../css/barra/ver-carta-completa.css">
+  <script src="../data/links.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Carta</h1>
+  </header>
+
+  <!-- Contenedor con scroll para menú -->
+  <div class="menu">
+    <div class="menu-inner" id="menu"></div>
+  </div>
+
+  <!-- Contenedor con scroll para imágenes -->
+  <div class="imagenes-scroll">
+    <div class="imagenes-carta">
+      <img src="../media/barra/ver-carta-completa/discotecalalogia.com.1.jpg" 
+           alt="Imagen 1" 
+           class="imagen-normal" />
+
+      <!-- Contenedor con scroll para zoom -->
+      <div class="zoom-container">
+        <img src="../media/barra/ver-carta-completa/discotecalalogia.com.2.jpg" 
+             alt="Imagen 2 - Zoom" 
+             class="imagen-zoom" />
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer-fijo">
+    <a href="../barra/barra.html" class="btn-regresar">Ver por categorías</a>
+  </footer>
+
+  <!-- Script para zoom focalizado con doble clic/doble toque -->
+  <script>
+    const imagenZoom = document.querySelector('.imagen-zoom');
+    let isDragging = false;
+    let startX, startY, scrollLeft, scrollTop;
+
+    // Zoom focalizado con doble clic
+    imagenZoom.addEventListener('dblclick', (e) => {
+      if (imagenZoom.classList.contains('zoomed')) {
+        imagenZoom.classList.remove('zoomed');
+        imagenZoom.style.transformOrigin = 'center center';
+      } else {
+        const rect = imagenZoom.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        let y = ((e.clientY - rect.top) / rect.height) * 100;
+
+        // Limitar el zoom vertical para que no quede demasiado arriba o abajo
+        y = Math.min(80, Math.max(20, y));
+
+        imagenZoom.style.transformOrigin = `${x}% ${y}%`;
+        imagenZoom.classList.add('zoomed');
+      }
+    });
+
+    // Arrastre para mover la imagen ampliada
+    imagenZoom.addEventListener('mousedown', (e) => {
+      if (imagenZoom.classList.contains('zoomed')) {
+        isDragging = true;
+        imagenZoom.style.cursor = 'grabbing';
+        startX = e.pageX;
+        startY = e.pageY;
+        const container = imagenZoom.parentElement;
+        scrollLeft = container.scrollLeft;
+        scrollTop = container.scrollTop;
+        e.preventDefault();
+      }
+    });
+
+    imagenZoom.addEventListener('mouseup', () => {
+      isDragging = false;
+      imagenZoom.style.cursor = 'grab';
+    });
+
+    imagenZoom.addEventListener('mouseleave', () => {
+      isDragging = false;
+      imagenZoom.style.cursor = 'grab';
+    });
+
+    imagenZoom.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const container = imagenZoom.parentElement;
+      const x = e.pageX - startX;
+      const y = e.pageY - startY;
+      container.scrollLeft = scrollLeft - x;
+      container.scrollTop = scrollTop - y;
+    });
+  </script>
+</body>
+</html>
