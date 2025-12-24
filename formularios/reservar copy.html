@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservas - La Logia</title>
+  <link rel="icon" href="../media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="../css/formularios/reservar.css" />
+</head>
+<body>
+  <h2>Formulario de Reserva</h2>
+  <form id="reservaForm">
+    <div id="zonaContainer"></div>
+
+    <label>Nombre completo:</label>
+    <input type="text" id="nombre" required><br><br>
+
+    <label>Teléfono de contacto:</label>
+    <div class="telefono-container">
+      <input id="codigoPais" list="listaPaises" placeholder="Buscar país" required>
+      <datalist id="listaPaises"></datalist>
+      <input type="text" id="contacto" placeholder="Ingrese su número de contacto" required>
+    </div><br><br>
+
+    <label>Número de personas:</label>
+    <input type="number" id="personas" required><br><br>
+
+    <!-- Campo de licor convertido en select -->
+    <label>Licor de preferencia:</label>
+    <select id="reservar-licor" required>
+      <option value="">--Seleccione licor--</option>
+    </select><br><br>
+
+    <label>¿Cumpleaños?:</label>
+    <select id="cumple" required>
+      <option value="">--Seleccione--</option>
+      <option value="No">No</option>
+      <option value="Sí">Sí</option>
+    </select><br><br>
+
+    <label>Fecha de la reserva:</label>
+    <input type="date" id="fecha" required><br><br>
+
+    <!-- Botón inicialmente deshabilitado -->
+    <button type="submit" id="submitBtn" disabled class="disabled">Solicitar reserva</button>
+  </form>
+
+  <!-- Importar scripts -->
+  <script src="../data/links.js"></script>
+  <script src="../data/formularios/indicativos.js"></script>
+  <script>
+    cargarIndicativos();
+
+    const zona = localStorage.getItem("zonaSeleccionada");
+    const zonaContainer = document.getElementById("zonaContainer");
+
+    if (zona && zona !== "Zona no especificada") {
+      zonaContainer.innerHTML = `<p id="zonaSeleccionada">Zona seleccionada: ${zona}</p>`;
+    } else {
+      zonaContainer.innerHTML = `
+        <label>Seleccione zona:</label>
+        <select id="zonaSeleccionada" required>
+          <option value="">--Seleccione--</option>
+          <option value="Palco">Palco - Primer piso</option>
+          <option value="Palco">Palco - Segundo piso</option>
+          <option value="VIP">VIP</option>
+          <option value="Mesa general">Mesa general</option>
+        </select><br><br>
+      `;
+    }
+
+    const numeroLocal = window.enlaces["numero-local"];
+    const contactoInput = document.getElementById("contacto");
+    const submitBtn = document.getElementById("submitBtn");
+
+    // Formatear número de teléfono mientras se escribe
+    contactoInput.addEventListener("input", function(e) {
+      let valor = e.target.value.replace(/\D/g, "");
+      if (valor.length > 0) {
+        valor = valor.replace(/^(\d{3})(\d{3})(\d{0,4}).*/, "($1) $2-$3");
+      }
+      e.target.value = valor;
+      validarFormulario();
+    });
+
+    // Cargar licores desde Google Sheet TSV
+    async function cargarLicores() {
+      try {
+        // Aquí usamos la nueva clave reservar-licor-data
+        const response = await fetch(window.enlaces["reservar-licor-data"]);
+        const text = await response.text();
+
+        // Separar por líneas
+        const lineas = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+
+        const selectLicor = document.getElementById("reservar-licor");
+
+        // Saltar la primera línea si es encabezado
+        lineas.slice(1).forEach(linea => {
+          const columnas = linea.split("\t"); // dividir por tabulación
+          const tipo = columnas[1]; // segunda columna = tipo de licor
+
+          if (tipo) {
+            const option = document.createElement("option");
+            option.value = tipo;
+            option.textContent = tipo;
+            selectLicor.appendChild(option);
+          }
+        });
+      } catch (error) {
+        console.error("Error cargando licores:", error);
+      }
+    }
+    cargarLicores();
+
+    // Validar todos los campos
+    function validarFormulario() {
+      const nombre = document.getElementById("nombre").value.trim();
+      const paisSeleccionado = document.getElementById("codigoPais").value.trim();
+      const contacto = document.getElementById("contacto").value.trim();
+      const personas = document.getElementById("personas").value.trim();
+      const licor = document.getElementById("reservar-licor").value.trim();
+      const cumple = document.getElementById("cumple").value.trim();
+      const fecha = document.getElementById("fecha").value.trim();
+      const zonaFinal = zona && zona !== "Zona no especificada" 
+        ? zona 
+        : document.getElementById("zonaSeleccionada").value.trim();
+
+      if (nombre && paisSeleccionado && contacto && personas && licor && cumple && fecha && zonaFinal) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove("disabled");
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.add("disabled");
+      }
+    }
+
+    // Escuchar cambios en todos los campos
+    document.querySelectorAll("#reservaForm input, #reservaForm select").forEach(el => {
+      el.addEventListener("input", validarFormulario);
+      el.addEventListener("change", validarFormulario);
+    });
+
+    document.getElementById("reservaForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const nombre = document.getElementById("nombre").value;
+      const paisSeleccionado = document.getElementById("codigoPais").value;
+      const contacto = document.getElementById("contacto").value;
+      const personas = document.getElementById("personas").value;
+      const licor = document.getElementById("reservar-licor").value;
+      const cumple = document.getElementById("cumple").value;
+      const fecha = document.getElementById("fecha").value;
+
+      const zonaFinal = zona && zona !== "Zona no especificada" 
+        ? zona 
+        : document.getElementById("zonaSeleccionada").value;
+
+      const pais = window.listaPaises.find(p => paisSeleccionado.includes(p.nombre));
+      const codigoPais = pais ? pais.codigo : "";
+
+      const telefonoMostrar = `%2B${codigoPais} ${contacto}`;
+
+      const mensaje = `*Fecha:* ${fecha}%0A%0A *Zona:* _${zonaFinal}_%0A *Nombre:* _${nombre}_%0A *Contacto:* _${telefonoMostrar}_%0A *N° Personas:* _${personas} personas_%0A *Licor:* _${licor}_%0A *Cumpleaños:* _${cumple}_`;
+
+      window.open(`https://wa.me/${numeroLocal}?text=${mensaje}`, "_blank");
+    });
+  </script>
+</body>
+</html>

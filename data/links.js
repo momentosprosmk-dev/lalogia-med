@@ -27,7 +27,11 @@
     "shots": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS9mUmmAUrk8dCWBVdGG-DQ1qrMNZFwmfnKh6aLun_t5ArvOeuJrdTGpJKG7an--iAdXCdOtlh4tEft/pub?gid=221881388&single=true&output=tsv",
     "nacional": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS9mUmmAUrk8dCWBVdGG-DQ1qrMNZFwmfnKh6aLun_t5ArvOeuJrdTGpJKG7an--iAdXCdOtlh4tEft/pub?gid=12887629&single=true&output=tsv",
     "bebidas": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS9mUmmAUrk8dCWBVdGG-DQ1qrMNZFwmfnKh6aLun_t5ArvOeuJrdTGpJKG7an--iAdXCdOtlh4tEft/pub?gid=955103174&single=true&output=tsv",
-    "vercartacompleta": ""
+    "vercartacompleta": "",
+
+
+    "reservar-licor-data": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS9mUmmAUrk8dCWBVdGG-DQ1qrMNZFwmfnKh6aLun_t5ArvOeuJrdTGpJKG7an--iAdXCdOtlh4tEft/pub?gid=653292468&single=true&output=tsv",
+    "numero-local": "573202877325"
   };
 
   // Al cargar, asigna los href o listeners a los elementos que existan

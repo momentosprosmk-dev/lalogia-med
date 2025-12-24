@@ -1,44 +1,83 @@
-/* Fondo general */
+/*=============== Fondo y tipografía general ===============*/
+html, body {
+  height: 100%;
+}
 body {
   font-family: Arial, sans-serif;
-  background: #111; /* gris muy oscuro */
-  color: #f4f4f4;   /* texto claro */
+  background: #000;
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  color: #f4f4f4;
 }
 
-/* Contenedor del formulario */
-form {
-  max-width: 500px;
-  margin: 0 auto;
-  background: #222; /* gris oscuro */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+/*=============== Encabezado fijo ===============*/
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #d62828;
+  background: #000;
+  z-index: 1000;
 }
-
-/* Título */
-h2 {
-  text-align: center;
-  color: #d62828; /* rojo de tu carta */
-  margin-bottom: 20px;
+header h1 {
+  color: #d62828;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
-/* Etiquetas */
-label {
+/*=============== Contenedor con scroll ===============*/
+.menu {
+  position: fixed;
+  top: 60px;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  padding: 20px;
+}
+.menu-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Scroll personalizado como el de la carta*/
+.menu::-webkit-scrollbar { width: 10px; }
+.menu::-webkit-scrollbar-track { background: #111; }
+.menu::-webkit-scrollbar-thumb {
+  background: #6e1f1f;
+  border-radius: 5px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+.menu::-webkit-scrollbar-thumb:hover { background: #822626; }
+
+/*=============== Estilos del formulario ===============*/
+form { display: flex; flex-direction: column; }
+
+/* Grupo de campo: controla separación entre preguntas */
+.field {
+  margin-bottom: 20px;
+}
+
+/* Label pegado a su control */
+.field > label {
   display: block;
-  margin-bottom: 6px;
   font-weight: bold;
   color: #ccc;
+  margin-bottom: 6px;
 }
 
 /* Inputs y selects */
 input, select {
   width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
   border: 2px solid #333;
   border-radius: 6px;
   background: #111;
@@ -54,29 +93,45 @@ input:focus, select:focus {
   outline: none;
 }
 
-/* Botón */
-button {
-  width: 100%;
-  padding: 12px;
-  background: #d62828;
-  color: #fff;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+/* Bloque especial para teléfono dentro del grupo */
+.telefono-container {
+  display: flex;
+  gap: 10px;
+}
+.telefono-container input {
+  flex: 1;
+}
+
+/* Placeholder del selector */
+select option[value=""] { color: #888; }
+
+/*=============== Footer fijo con botón ===============*/
+.footer-fijo {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%; height: 50px;
+  background: #000;
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.6);
+}
+
+.footer-fijo button {
+  background: #d62828; color: #fff;
+  padding: 10px 20px; border-radius: 6px;
+  font-weight: 700; text-transform: uppercase;
+  border: none; cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
-
-button:hover {
-  background: #e50914;
-  transform: scale(1.05);
+.footer-fijo button:hover:not(.disabled) {
+  background: #e50914; transform: scale(1.05);
 }
 
-/* Texto de zona seleccionada */
-#zonaSeleccionada {
-  text-align: center;
-  font-size: 16px;
-  margin-bottom: 20px;
-  color: #f4f4f4;
+/* Botón deshabilitado */
+button.disabled { background: #555; color: #aaa; cursor: not-allowed; transform: none; }
+button.disabled:hover { background: #555; transform: none; }
+
+/*=============== Responsive ===============*/
+@media (max-width: 480px) {
+  .menu-inner { max-width: 95%; }
 }

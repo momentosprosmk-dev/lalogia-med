@@ -4,7 +4,6 @@ html, body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  box-sizing: border-box;
   font-family: 'Segoe UI', 'Roboto', sans-serif;
   background-color: #000;
 }
@@ -13,25 +12,19 @@ html, body {
   box-sizing: border-box;
 }
 
-
-/*=============== Divicion de plano y botones (Inicio - Primer Piso - Segundo Piso) ===============*/
-
-/* Plano ocupa todo el alto menos la barra */
+/*=============== Plano y barra ===============*/
 #plano-container {
-  height: calc(100vh - 60px); /* 60px = altura real de la barra */
+  height: calc(100vh - 60px);
   overflow-y: auto;
-  margin: 0;
-  padding: 0;
 }
 
-/* Barra inferior fija */
 .barra-navegacion {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 60px;
-  background-color: #1e1e1e;
+  background: #1e1e1e;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +32,6 @@ html, body {
   border-top: 2px solid #1e1e1e;
 }
 
-/* Botones dentro de la barra */
 .nav-contenedor {
   display: flex;
   justify-content: center;
@@ -50,39 +42,28 @@ html, body {
 }
 
 .nav-btn {
-  flex: 1 1 0;
+  flex: 1;
   max-width: 150px;
   height: 40px;
   line-height: 40px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  background-color: #444;
+  background: #444;
   color: #fdf6e3;
   border: 2px solid #6e1f1f;
-  font-size: 0.85rem;
+  font-size: .85rem;
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 6px;
   font-weight: 600;
   text-align: center;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background .3s ease, transform .3s ease;
 }
+.nav-btn:hover { background: #666; transform: scale(1.05); }
+.nav-btn.activo { background: #7a0000; }
 
-.nav-btn:hover {
-  background-color: #666;
-  transform: scale(1.05);
-}
-
-.nav-btn.activo {
-  background-color: #7a0000;
-  color: #fdf6e3;
-}
-
-
-/*=============== Banners===============*/
-
-/* Contenedor externo del banner */
+/*=============== Banner ===============*/
 .banner-fotos {
   position: fixed;
   top: 45%;
@@ -98,31 +79,23 @@ html, body {
   background: url('../../media/arquitectura/arquitectura.jpg') center/cover no-repeat;
   border: 2px solid #b8860b;
   border-radius: 12px;
-  box-shadow:
-    0 0 30px rgba(212, 175, 55, 0.7),
-    0 0 12px rgba(255, 215, 0, 0.4),
-    inset 0 0 8px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 30px rgba(212,175,55,.7),
+              0 0 12px rgba(255,215,0,.4),
+              inset 0 0 8px rgba(212,175,55,.3);
 }
-.banner-fotos.visible {
-  display: flex !important;
-}
+.banner-fotos.visible { display: flex !important; }
+
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(42, 42, 42, 0.6);
+  inset: 0;
+  background: rgba(42,42,42,.6);
   display: none;
   z-index: 998;
 }
-.overlay.visible {
-  display: block;
-}
+.overlay.visible { display: block; }
 
-/* Contenedor interno centrado */
 .banner-fotos-content {
-  background-color: rgba(0, 0, 0, 0.7);
+  background: rgba(0,0,0,.7);
   padding: 24px;
   width: 90%;
   max-width: 480px;
@@ -132,157 +105,114 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 16px;
-  animation: fadeInScale 0.5s ease-out;
+  animation: fadeInScale .5s ease-out;
 }
 
-/* Título del banner */
 .banner-fotos > .titulo-banner {
   color: #fdf6e3;
   font-size: clamp(2rem, 5vw, 2.8rem);
   text-align: center;
   margin-bottom: 16px;
-  font-family: 'Segoe UI', 'Roboto', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 /* Carrusel */
-.banner-fotos .carrusel {
+.carrusel {
   position: relative;
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-.banner-fotos .imagen-contenedor {
+.imagen-contenedor {
   width: 100%;
   height: 300px;
+  display: flex;
   overflow-x: auto;
   white-space: nowrap;
   scroll-behavior: smooth;
-  display: flex;
 }
-
-.banner-fotos .imagen-contenedor img {
+.imagen-contenedor img {
   flex-shrink: 0;
   height: 100%;
   object-fit: contain;
   display: none;
   margin: auto;
 }
+.imagen-contenedor img.imagen-activa { display: block; }
 
-.banner-fotos .imagen-contenedor img.imagen-activa {
-  display: block;
-}
-
-/* Flechas de navegación */
-.banner-fotos .flecha {
+/* Flechas */
+.flecha {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(212, 175, 55, 0.3);
+  background: rgba(212,175,55,.3);
   border: none;
   color: #fff;
   font-size: 1.2rem;
   padding: 4px 8px;
   cursor: pointer;
   border-radius: 50%;
-  z-index: 1;
-  opacity: 0.5;
-  transition: opacity 0.3s ease, background-color 0.3s ease;
+  opacity: .5;
+  transition: opacity .3s ease, background .3s ease;
 }
-.banner-fotos .flecha:hover {
-  opacity: 1;
-  background-color: rgba(212, 175, 55, 0.6);
-}
-.banner-fotos .flecha.izquierda {
-  left: 8px;
-}
-.banner-fotos .flecha.derecha {
-  right: 8px;
-}
+.flecha:hover { opacity: 1; background: rgba(212,175,55,.6); }
+.flecha.izquierda { left: 2px; }
+.flecha.derecha { right: 2px; }
 
-/* Contenedor de botones */
+/* Botones banner */
 .botones-banner {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 16px;
   width: 100%;
-  margin-top: 24px; /* ✅ más separación del carrusel */
+  margin-top: 24px;
 }
 
-/* Botones dorados más altos */
 .cerrar-banner,
 .reservar-banner {
-  background-color: #d4af37;
-  color: #1e1e1e;
-  border: 1px solid #b8860b;
-  padding: 16px 20px; /* ✅ más altos */
-  font-size: clamp(1rem, 3vw, 1.2rem);
-  border-radius: 6px;
+  background: #2a2a2a;
+  color: #d4af37;
+  border: 1px solid #d4af37;
+  padding: 12px 18px;
+  font-size: clamp(.9rem, 2.5vw, 1.1rem);
+  border-radius: 4px;
   font-weight: 600;
   text-transform: uppercase;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  width: 100%;
-  max-width: 320px;
+  box-shadow: 0 0 4px rgba(212,175,55,.25);
+  transition: background .25s ease, color .25s ease, transform .25s ease;
+  flex: 1;
+  max-width: 200px;
 }
 .cerrar-banner:hover,
 .reservar-banner:hover {
-  background-color: #e0c060;
+  background: #d4af37;
+  color: #000;
   transform: scale(1.03);
 }
 
 /* Animación */
 @keyframes fadeInScale {
-  0% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0% { opacity: 0; transform: scale(.9); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
-/* Responsive ajustes */
-@media screen and (max-width: 600px) {
-  .banner-fotos {
-    padding: 16px;
-  }
-
-  .banner-fotos .imagen-contenedor {
-    height: 40vh;
-  }
-
-  .banner-fotos .flecha {
-    font-size: 1.2rem;
-    padding: 6px 10px;
-  }
-
-  .cerrar-banner,
-  .reservar-banner {
+/* Responsive */
+@media (max-width: 600px) {
+  .banner-fotos { padding: 16px; }
+  .imagen-contenedor { height: 40vh; }
+  .flecha { font-size: 1.2rem; padding: 6px 10px; }
+  .cerrar-banner, .reservar-banner {
     max-width: 100%;
     padding: 14px 16px;
-    font-size: 0.95rem;
+    font-size: .95rem;
   }
-
-  .botones-banner {
-    margin-top: 20px;
-  }
-
-  .banner-fotos > .titulo-banner {
-    font-size: clamp(1.6rem, 6vw, 2.2rem);
-  }
-
-  .banner-fotos-content {
-    width: 96.5%;
-  }
+  .botones-banner { margin-top: 20px; }
+  .titulo-banner { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+  .banner-fotos-content { width: 96.5%; }
 }
