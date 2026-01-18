@@ -12,20 +12,17 @@
     <img src="media/index_logo.jpg" alt="Logo Iluminati" class="logo-img" />
   </header>
 
-
   <!--=============== Botones ===============-->
   <div class="recuadro">
+    <a id="btn-barra" class="bt-opc" href="#">ofertas</a>
     <a id="btn-arquitectura" class="bt-opc">explorar templo</a>
-    <a id="btn-barra" class="bt-opc">Ofertas</a>
-    <a id="btn-eventos" class="bt-opc">Rituales</a>
-    <a id="btn-momentos" class="bt-opc">Momentos</a>
-    <a id="btn-wifi" class="bt-opc">Wi-Fi</a>
-    <a id="btn-opinion" class="bt-opc">Tu opinión</a>
-    <a id="btn-contacto" class="bt-opc">Contacto</a>
-    <a id="btn-qrweb" class="bt-opc">Compartir Web</a>
-    <!-- <a id="btn-sitioweb" class="bt-opc">Sitio web</a>-->
+    <a id="btn-eventos" class="bt-opc">rituales</a>
+    <a id="btn-momentos" class="bt-opc">momentos</a>
+    <a id="btn-opinion" class="bt-opc">tu opinión</a>
+    <a id="btn-contacto" class="bt-opc">contacto</a>
+    <a id="btn-wifi" class="bt-opc">wi-fi</a>
+    <a id="btn-qrweb" class="bt-opc">compartir Web</a>
   </div>
-
 
   <!--=============== Pie de página ===============-->
   <footer class="footer">
@@ -34,43 +31,35 @@
     </div>
   </footer>
 
-
   <!--=============== Banners ===============-->
-
-  <!-- Banner - Bienvenida arquitectura -->
   <div id="banner-arquitectura" class="bn-arq">
     <div class="bn-arq-content">
       <h2 id="mensaje-arquitectura" class="msg-arq"></h2>
       <div class="botones-horizontal">
-        <a href="arquitectura/p1/p1.html" class="btn-arq">Primer Piso</a>
-        <a href="arquitectura/p2/p2.html" class="btn-arq">Segundo Piso</a>
+        <a href="arquitectura/nivel_1/" class="btn-arq">Primer Piso</a>
+        <a href="arquitectura/nivel_2/" class="btn-arq">Segundo Piso</a>
       </div>
     </div>
   </div>
 
-  <!-- Banner - Wi-Fi -->
   <div id="banner-wifi" class="bn-wifi">
     <div class="bn-wifi-content">
-      <h2 class="bn-wifi-titulo">CONECTATE</h2>
+      <h2 class="bn-wifi-titulo">CONÉCTATE</h2>
       <img src="media/wifi/wifi.jpg" alt="Código QR WiFi" class="qr-img" />
       <button id="cerrar-wifi" class="btn-bn-cerrar">Cerrar</button>
     </div>
   </div>
 
-
-  <!-- Banner - Contacto -->
   <div id="contacto-banner" class="contacto-banner">
     <div class="contacto-content">
       <h2 class="contacto-titulo">CONTACTO</h2>
       <a id="btn-whatsapp" target="_blank" class="contacto-btn">WhatsApp</a>
       <a id="btn-instagram" target="_blank" class="contacto-btn">Instagram</a>
       <a id="btn-facebook" target="_blank" class="contacto-btn">Facebook</a>
-      <a id="btn-expresate" target="_blank" class="contacto-btn">Exprésate</a>
       <button id="cerrar-contacto" class="btn-contacto-cerrar">Cerrar</button>
     </div>
   </div>
 
-  <!-- Banner - QR qrweb -->
   <div id="qrweb-banner" class="bn-wifi">
     <div class="bn-wifi-content">
       <h2 class="bn-wifi-titulo">COMPARTIR WEB</h2>
@@ -94,36 +83,25 @@
       const cerrarContacto = document.getElementById("cerrar-contacto");
       const qrwebBanner = document.getElementById("qrweb-banner");
       const cerrarQrweb = document.getElementById("cerrar-qrweb");
+      const btnBarra = document.getElementById("btn-barra");
 
       // Mostrar - Banner Wi-Fi
       document.getElementById("btn-wifi")?.addEventListener("click", () => {
         bn_wifi.classList.add("visible");
       });
-
-      // Cerrar - Banner Wi-Fi
-      cerrarQr?.addEventListener("click", () => {
-        bn_wifi.classList.remove("visible");
-      });
+      cerrarQr?.addEventListener("click", () => bn_wifi.classList.remove("visible"));
 
       // Mostrar - Banner contacto
       document.getElementById("btn-contacto")?.addEventListener("click", () => {
         contactoBanner.classList.add("visible");
       });
-
-      // Cerrar - Banner contacto
-      cerrarContacto?.addEventListener("click", () => {
-        contactoBanner.classList.remove("visible");
-      });
+      cerrarContacto?.addEventListener("click", () => contactoBanner.classList.remove("visible"));
 
       // Mostrar - Banner QR Web
       document.getElementById("btn-qrweb")?.addEventListener("click", () => {
         qrwebBanner.classList.add("visible");
       });
-
-      // Cerrar - Banner QR Web
-      cerrarQrweb?.addEventListener("click", () => {
-        qrwebBanner.classList.remove("visible");
-      });
+      cerrarQrweb?.addEventListener("click", () => qrwebBanner.classList.remove("visible"));
 
       // Mostrar - Banner arquitectura
       document.getElementById("btn-arquitectura")?.addEventListener("click", () => {
@@ -147,6 +125,62 @@
           }
         });
       });
+
+      // Ofertas
+      const url = window.enlaces["btn-barra"];
+      const clean = (v) => v.replace(/^\s*"?|"?\s*$/g, "").replace(/\r/g, "");
+
+      let rutaFinal = null;
+      const rutaFallback = "/barra/ver_carta_completa/";
+
+      btnBarra.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (rutaFinal) {
+          window.location.href = rutaFinal;
+        } else {
+          console.warn("La ruta aún no está lista. Redirigiendo por defecto.");
+          window.location.href = rutaFallback;
+        }
+      });
+
+      fetch(url + "&t=" + Date.now(), { cache: "no-store" })
+        .then(res => res.text())
+        .then(text => {
+          const head = text.slice(0, 50).toLowerCase();
+          if (head.includes("<!doctype") || head.includes("<html")) {
+            console.error("La URL de 'btn-barra' no devuelve TSV, sino HTML. Usando ruta por defecto.");
+            rutaFinal = rutaFallback;
+            return;
+          }
+
+          const lines = text.split("\n").filter(l => l.trim().length > 0);
+          const headers = lines[0].split("\t").map(h => clean(h).toLowerCase());
+
+          const iTipo = headers.indexOf("tipo");
+          const iValor = headers.indexOf("valor");
+          if (iTipo === -1 || iValor === -1) {
+            console.error("Encabezados inválidos. Usando ruta por defecto.");
+            rutaFinal = rutaFallback;
+            return;
+          }
+
+          const fila = lines.slice(1)
+            .map(line => line.split("\t").map(clean))
+            .find(cols => cols[iTipo] === "barra_clasif");
+
+          if (fila && fila[iValor]) {
+            rutaFinal = `/barra/${clean(fila[iValor])}`;
+            console.log("Ruta final lista:", rutaFinal);
+          } else {
+            console.warn("No se encontró ninguna fila válida con tipo = barra_clasif. Usando ruta por defecto.");
+            rutaFinal = rutaFallback;
+          }
+        })
+        .catch(err => {
+          console.error("Error al cargar TSV:", err);
+          rutaFinal = rutaFallback;
+        });
+
     });
   </script>
 </body>

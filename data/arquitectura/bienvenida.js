@@ -1,11 +1,15 @@
 function generarBienvenida() {
   return `
-    Bienvenido al templo del perreo.<br><br>
-    Selecciona el piso que deseas explorar en esta travesía visual.<br><br>
-    <strong>En el primer piso, encontrarás:</strong><br>
-    Energía colectiva, pista general, sin distinción,<br>
-    donde todos perrean con todos.<br><br>
-    <strong>Y en el segundo piso, encontrarás:</strong><br>
-    Exclusividad, palcos, zonas VIP y acceso reservado.<br><br>
+    Bienvenido al Templo del Perreo.<br><br>
+    Selecciona el piso para vivir la experiencia:<br><br>
+    
+    <strong>Primer piso:</strong><br>
+    Pista general, ambiente colectivo y energía sin límites,<br>
+    donde todos disfrutan juntos.<br><br>
+    
+    <strong>Segundo piso:</strong><br>
+    Palcos exclusivos, zonas VIP y acceso reservado<br>
+    para una experiencia más privada.<br><br>
   `;
 }
+
