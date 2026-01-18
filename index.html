@@ -169,7 +169,7 @@
             .find(cols => cols[iTipo] === "barra_clasif");
 
           if (fila && fila[iValor]) {
-            rutaFinal = `/barra/${clean(fila[iValor])}`;
+            rutaFinal = `barra/${clean(fila[iValor])}`;
             console.log("Ruta final lista:", rutaFinal);
           } else {
             console.warn("No se encontró ninguna fila válida con tipo = barra_clasif. Usando ruta por defecto.");
