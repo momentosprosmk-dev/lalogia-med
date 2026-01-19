@@ -15,7 +15,7 @@
   <!--=============== Botones ===============-->
   <div class="recuadro">
     <a id="btn-barra" class="bt-opc" href="#">ofertas</a>
-    <a id="btn-arquitectura" class="bt-opc">explorar templo</a>
+    <!--<a id="btn-arquitectura" class="bt-opc">explorar templo</a>-->
     <a id="btn-eventos" class="bt-opc">rituales</a>
     <a id="btn-momentos" class="bt-opc">momentos</a>
     <a id="btn-opinion" class="bt-opc">tu opinión</a>
@@ -144,8 +144,11 @@
       });
 
       fetch(url + "&t=" + Date.now(), { cache: "no-store" })
-        .then(res => res.text())
-        .then(text => {
+        .then(res => res.arrayBuffer())
+        .then(buf => {
+
+          const text = new TextDecoder("utf-8").decode(buf);
+
           const head = text.slice(0, 50).toLowerCase();
           if (head.includes("<!doctype") || head.includes("<html")) {
             console.error("La URL de 'btn-barra' no devuelve TSV, sino HTML. Usando ruta por defecto.");
