@@ -38,7 +38,7 @@ body {
   font-family: var(--fuente-principal);
   color: var(--color-texto-claro);
   line-height: 1.6;
-  background: url('../media/index.jpg') center/cover no-repeat;
+  background: url('../media/index_v3.jpg') center/cover no-repeat;
 }
 
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MomentosPro - TyC</title>
+  <link rel="icon" href="../media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="../css/tyc/tyc.css" />
+</head>
+<body>
+  <main class="contenedor">
+    <iframe
+      src="tyc.html"
+      class="visor"
+      allowfullscreen
+      loading="lazy"
+    ></iframe>
+  </main>
+
+  <footer class="footer-fijo">
+    <div class="botones-horizontal">
+      <div class="btn-wrapper">
+        <button id="btn-aceptar" class="btn-regresar">Aceptar</button>
+      </div>
+      <div class="btn-wrapper">
+        <button id="btn-rechazar" class="btn-regresar">No acepto</button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("btn-aceptar").addEventListener("click", function() {
+      localStorage.setItem("tyc", "1");
+      window.location.href = "../../../";
+    });
+
+    document.getElementById("btn-rechazar").addEventListener("click", function() {
+      localStorage.setItem("tyc", "0");
+      window.location.href = "rechazo_tyc/";
+    });
+  </script>
+</body>
+</html>
