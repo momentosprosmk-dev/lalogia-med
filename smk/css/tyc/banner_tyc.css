@@ -101,3 +101,28 @@
     font-size: 0.9rem;
   }
 }
+
+/* Texto del banner */
+.bn-tyc-content p {
+  color: #555;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;   /* más grande que el 1.1rem original */
+  line-height: 1.7;
+}
+
+/* Negrita dentro del banner */
+.bn-tyc-content strong {
+  font-weight: 700;
+  font-size: 1.4rem;   /* aún más grande para destacar "Discoteca La Logia" */
+  color: #000;
+}
+
+/* Enlace dentro del banner */
+.bn-tyc-content .link-tyc {
+  display: inline-block;
+  margin: 1rem 0;
+  color: #0066cc;
+  text-decoration: underline;
+  font-weight: 600;
+  font-size: 1.2rem;   /* más grande que antes */
+}
