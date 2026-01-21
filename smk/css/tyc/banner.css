@@ -25,36 +25,50 @@
   width: 95%;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   border: 1px solid #ccc;
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Fuente más seria y profesional */
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   color: #333;
 }
 
 /* Títulos del banner */
 .bn-tyc-content h2 {
-  font-family: 'Merriweather', serif;
-  color: #333;
-  font-size: 1.8rem;
-  margin-bottom: 1.2rem;
-}
-
-/* Texto del banner */
-.bn-tyc-content h2 {
-  font-family: 'Merriweather', serif;
-  color: #333;
+  font-family: 'Lora', 'Georgia', serif; /* serif elegante para títulos */
+  color: #222;
   font-size: 1.8rem;
   margin-bottom: 1.2rem;
   border-bottom: 3px solid #bbb;
   padding-bottom: 0.6rem;
 }
 
+/* Texto del banner */
+.bn-tyc-content p {
+  color: #444;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  line-height: 1.7;
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Negrita dentro del banner */
+.bn-tyc-content strong {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #000;
+}
+
 /* Enlace dentro del banner */
 .bn-tyc-content .link-tyc {
   display: inline-block;
   margin: 1rem 0;
-  color: #0066cc;
+  color: #0056a3;
   text-decoration: underline;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  transition: color 0.2s;
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+.bn-tyc-content .link-tyc:hover {
+  color: #003d73;
 }
 
 /* Botones del Banner TyC */
@@ -84,6 +98,7 @@
   transition: background 0.2s, color 0.2s, transform 0.2s;
   text-align: center;
   white-space: nowrap;
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 .bn-tyc .btn-tyc:hover {
   background: #222;
@@ -100,29 +115,4 @@
     padding: 8px 14px;
     font-size: 0.9rem;
   }
-}
-
-/* Texto del banner */
-.bn-tyc-content p {
-  color: #555;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;   /* más grande que el 1.1rem original */
-  line-height: 1.7;
-}
-
-/* Negrita dentro del banner */
-.bn-tyc-content strong {
-  font-weight: 700;
-  font-size: 1.4rem;   /* aún más grande para destacar "Discoteca La Logia" */
-  color: #000;
-}
-
-/* Enlace dentro del banner */
-.bn-tyc-content .link-tyc {
-  display: inline-block;
-  margin: 1rem 0;
-  color: #0066cc;
-  text-decoration: underline;
-  font-weight: 600;
-  font-size: 1.2rem;   /* más grande que antes */
 }
