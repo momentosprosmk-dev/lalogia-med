@@ -74,55 +74,59 @@
   <script src="data/links.js" defer></script>
   <script src="data/arquitectura/bienvenida.js" defer></script>
   <script src="data/index.js" defer></script>
+  
+<div id="tyc-container"></div>
 
-  <div id="tyc-container"></div>
+<script>
+  // Si quieres forzar una ruta manual, edítala aquí.
+  // Ejemplo: "../../" o "../../../"
+  let rutaBaseManual = "";  
 
-  <script>
-    const basePath = window.enlaces?.reponame || "";
+  // Si no defines rutaBaseManual, se usa el reponame de links.js
+  const rutaBase = rutaBaseManual || (window.enlaces?.reponame || "");
 
-    window.bannerConfig = {
-      cssRuta: basePath + "smk/css/tyc/banner.css",
-      linkRuta: basePath + "smk/tyc/",
-      rechazarRuta: basePath + "barra/ver_carta_completa/"
-    };
+  window.bannerConfig = {
+    cssRuta: rutaBase + "smk/css/tyc/banner.css",
+    linkRuta: rutaBase + "smk/tyc/",
+    rechazarRuta: rutaBase + "barra/ver_carta_completa/"
+  };
 
-    fetch(basePath + "smk/tyc/banner.html")
-      .then(res => res.text())
-      .then(html => {
-        const container = document.getElementById("tyc-container");
-        if (!container) return;
-        container.innerHTML = html;
+  fetch(rutaBase + "smk/tyc/banner.html")
+    .then(res => res.text())
+    .then(html => {
+      const container = document.getElementById("tyc-container");
+      if (!container) return;
+      container.innerHTML = html;
 
-        // Inyectar CSS
-        if (window.bannerConfig.cssRuta) {
-          const css = document.createElement("link");
-          css.rel = "stylesheet";
-          css.href = window.bannerConfig.cssRuta;
-          document.head.appendChild(css);
+      // Inyectar CSS
+      const css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = window.bannerConfig.cssRuta;
+      document.head.appendChild(css);
+
+      // Cargar JS del banner
+      const script = document.createElement("script");
+      script.src = rutaBase + "smk/tyc/banner.js";
+      script.onload = () => {
+        if (typeof iniciarBannerTyC === "function") {
+          iniciarBannerTyC();
         }
+      };
+      document.body.appendChild(script);
 
-        // Cargar JS del banner
-        const script = document.createElement("script");
-        script.src = basePath + "smk/tyc/banner.js";
-        script.onload = () => {
-          if (typeof iniciarBannerTyC === "function") {
-            iniciarBannerTyC();
-          }
-        };
-        document.body.appendChild(script);
+      // Ajustar enlaces dinámicamente
+      const linkTyc = container.querySelector("#link-tyc");
+      if (linkTyc) linkTyc.href = window.bannerConfig.linkRuta;
 
-        // Ajustar rutas dinámicamente
-        const linkTyc = container.querySelector("#link-tyc");
-        if (linkTyc) linkTyc.href = window.bannerConfig.linkRuta;
+      const btnRechazar = container.querySelector("#btn-rechazar-tyc");
+      if (btnRechazar) {
+        btnRechazar.addEventListener("click", () => {
+          window.location.href = window.bannerConfig.rechazarRuta;
+        });
+      }
+    })
+    .catch(err => console.error("Error cargando banner TyC:", err));
+</script>
 
-        const btnRechazar = container.querySelector("#btn-rechazar-tyc");
-        if (btnRechazar) {
-          btnRechazar.addEventListener("click", () => {
-            window.location.href = window.bannerConfig.rechazarRuta;
-          });
-        }
-      })
-      .catch(err => console.error("Error cargando banner TyC:", err));
-  </script>
 </body>
 </html>
