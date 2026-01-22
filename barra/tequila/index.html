@@ -79,7 +79,6 @@
     });
   </script>
 
-  <!-- Footer fijo -->
   <footer class="footer-fijo">
     <a href="../" class="btn-regresar">Ver más opciones</a>
   </footer>
@@ -87,7 +86,7 @@
   <div id="tyc-container"></div>
 
   <script>
-    const basePath = "../../";
+    const basePath = window.enlaces?.reponame || "../../";
 
     window.bannerConfig = {
       cssRuta: basePath + "smk/css/tyc/banner.css",
