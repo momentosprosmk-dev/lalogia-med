@@ -2,7 +2,7 @@ function iniciarBannerTyC() {
   const bannerTyc   = document.getElementById("banner-tyc");
   const btnAceptar  = document.getElementById("btn-aceptar-tyc");
   const btnRechazar = document.getElementById("btn-rechazar-tyc");
-  const linkTyc     = document.getElementById("link-tyc");
+  const linkTyc     = document.querySelector(".link-tyc");
 
   const tyc = localStorage.getItem("tyc");
   if (tyc !== "1") {
@@ -17,15 +17,12 @@ function iniciarBannerTyC() {
   });
 
   btnRechazar.addEventListener("click", () => {
-    if (window.bannerConfig?.rechazarRuta) {
-      window.location.href = window.bannerConfig.rechazarRuta;
-    }
+    localStorage.setItem("tyc", "0");
+    window.location.href = "/barra/ver_carta_completa/";
   });
 
   linkTyc.addEventListener("click", (e) => {
     e.preventDefault();
-    if (window.bannerConfig?.linkRuta) {
-      window.location.href = window.bannerConfig.linkRuta;
-    }
+    window.location.href = "/smk/tyc/";
   });
 }

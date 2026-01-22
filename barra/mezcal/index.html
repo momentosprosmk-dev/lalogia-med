@@ -83,32 +83,52 @@
   <footer class="footer-fijo">
     <a href="../" class="btn-regresar">Ver más opciones</a>
   </footer>
-  
+
   <div id="tyc-container"></div>
 
-    <script>
-      function repoPath(path) {
-        const base = window.enlaces?.reponame || "";
-        return `${base}${path}`;
-      }
+  <script>
+    const basePath = "../../";
 
-      fetch(repoPath("/smk/tyc/banner.html"))
-        .then((res) => res.text())
-        .then((html) => {
-          const container = document.getElementById("tyc-container");
-          if (!container) return;
-          container.innerHTML = html;
+    window.bannerConfig = {
+      cssRuta: basePath + "smk/css/tyc/banner.css",
+      linkRuta: basePath + "smk/tyc/",
+      rechazarRuta: basePath + "barra/ver_carta_completa/"
+    };
 
-          const script = document.createElement("script");
-          script.src = repoPath("/smk/tyc/banner.js");
-          script.onload = () => {
-            if (typeof iniciarBannerTyC === "function") {
-              iniciarBannerTyC();
-            }
-          };
-          document.body.appendChild(script);
-        })
-        .catch((err) => console.error("Error cargando banner TyC:", err));
-    </script>
+    fetch(basePath + "smk/tyc/banner.html")
+      .then(res => res.text())
+      .then(html => {
+        const container = document.getElementById("tyc-container");
+        if (!container) return;
+        container.innerHTML = html;
+
+        if (window.bannerConfig.cssRuta) {
+          const css = document.createElement("link");
+          css.rel = "stylesheet";
+          css.href = window.bannerConfig.cssRuta;
+          document.head.appendChild(css);
+        }
+
+        const script = document.createElement("script");
+        script.src = basePath + "smk/tyc/banner.js";
+        script.onload = () => {
+          if (typeof iniciarBannerTyC === "function") {
+            iniciarBannerTyC();
+          }
+        };
+        document.body.appendChild(script);
+
+        const linkTyc = container.querySelector("#link-tyc");
+        if (linkTyc) linkTyc.href = window.bannerConfig.linkRuta;
+
+        const btnRechazar = container.querySelector("#btn-rechazar-tyc");
+        if (btnRechazar) {
+          btnRechazar.addEventListener("click", () => {
+            window.location.href = window.bannerConfig.rechazarRuta;
+          });
+        }
+      })
+      .catch(err => console.error("Error cargando banner TyC:", err));
+  </script>
 </body>
 </html>

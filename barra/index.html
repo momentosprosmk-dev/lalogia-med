@@ -8,25 +8,23 @@
   <link rel="stylesheet" href="./../css/barra/barra.css">
 </head>
 <body>
-  <!-- Encabezado -->
   <header>
     <h1>Menú de Ofertas</h1>
     <p>Selecciona una categoría para explorar</p>
   </header>
 
-  <!-- Contenedor con scroll -->
   <div class="contenedor-scroll">
     <main class="categorias">
-      <!-- Carta completa-->
+
       <a href="ver_carta_completa" class="categoria">Ver Carta Completa</a>
       <a href="hookah" class="categoria">Hookah</a>
-      <!-- Premium / Top -->
+
       <a href="whisky" class="categoria">Whisky</a>
       <a href="tequila" class="categoria">Tequila</a>
       <a href="mezcal" class="categoria">Mezcal</a>
       <a href="cognac" class="categoria">Cognac</a>
       <a href="champagne" class="categoria">Champagne</a>
-      <!-- Medio -->  
+ 
       <a href="ron_premium" class="categoria">Ron Premium</a>
       <a href="vodka" class="categoria">Vodka</a>
       <a href="ginebra" class="categoria">Ginebra</a>
@@ -34,13 +32,12 @@
       <a href="vino_espumoso" class="categoria">Vino Espumoso</a>
       <a href="nacional" class="categoria">Nacional</a>
       <a href="cocteles" class="categoria">Cocteles</a>
-      <!-- Básico / Popular -->
+
       <a href="shots" class="categoria">Shots</a>
       <a href="bebidas" class="categoria">Bebidas</a>
     </main>
   </div>
 
-  <!-- Footer fijo -->
   <footer class="footer-fijo">
     <a href="../" class="btn-regresar">⬅ Regresar</a>
   </footer>
@@ -48,23 +45,48 @@
   <div id="tyc-container"></div>
 
   <script>
-    fetch("/smk/tyc/banner.html")
-      .then((res) => res.text())
-      .then((html) => {
+    const basePath = "../";
+
+    window.bannerConfig = {
+      cssRuta: basePath + "smk/css/tyc/banner.css",
+      linkRuta: basePath + "smk/tyc/",
+      rechazarRuta: basePath + "barra/ver_carta_completa/"
+    };
+
+    fetch(basePath + "smk/tyc/banner.html")
+      .then(res => res.text())
+      .then(html => {
         const container = document.getElementById("tyc-container");
         if (!container) return;
         container.innerHTML = html;
 
+        if (window.bannerConfig.cssRuta) {
+          const css = document.createElement("link");
+          css.rel = "stylesheet";
+          css.href = window.bannerConfig.cssRuta;
+          document.head.appendChild(css);
+        }
+
         const script = document.createElement("script");
-        script.src = "/smk/tyc/banner.js";
+        script.src = basePath + "smk/tyc/banner.js";
         script.onload = () => {
           if (typeof iniciarBannerTyC === "function") {
             iniciarBannerTyC();
           }
         };
         document.body.appendChild(script);
+
+        const linkTyc = container.querySelector("#link-tyc");
+        if (linkTyc) linkTyc.href = window.bannerConfig.linkRuta;
+
+        const btnRechazar = container.querySelector("#btn-rechazar-tyc");
+        if (btnRechazar) {
+          btnRechazar.addEventListener("click", () => {
+            window.location.href = window.bannerConfig.rechazarRuta;
+          });
+        }
       })
-      .catch((err) => console.error("Error cargando banner TyC:", err));
+      .catch(err => console.error("Error cargando banner TyC:", err));
   </script>
 </body>
 </html>

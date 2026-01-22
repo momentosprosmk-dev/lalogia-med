@@ -430,43 +430,11 @@
         <button class="cerrar-banner" onclick="cerrarBanner('bnvip5')">Cerrar</button>
       </div>
     </div>
-  
-  <div id="tyc-container"></div>
-  
-  <script script src="../../data/links.js"></script>
 
-    <script>
-      function repoPath(path) {
-        const base = window.enlaces?.reponame || "";
-        return `${base}${path}`;
-      }
-
-      fetch(repoPath("/smk/tyc/banner.html"))
-        .then((res) => res.text())
-        .then((html) => {
-          const container = document.getElementById("tyc-container");
-          if (!container) return;
-          container.innerHTML = html;
-
-          const script = document.createElement("script");
-          script.src = repoPath("/smk/tyc/banner.js");
-          script.onload = () => {
-            if (typeof iniciarBannerTyC === "function") {
-              iniciarBannerTyC();
-            }
-          };
-          document.body.appendChild(script);
-        })
-        .catch((err) => console.error("Error cargando banner TyC:", err));
-    </script>
-  
-  <!-- Script para generar tabla y botones -->
   <script src="estructura.js"></script>
 
-  <!-- Script genérico para carruseles y banners -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // Carruseles
       const carruseles = document.querySelectorAll(".carrusel");
       carruseles.forEach((carrusel) => {
         let indice = 0;
@@ -489,7 +457,6 @@
         });
       });
 
-      // Cierre al hacer clic fuera del banner
       const overlay = document.getElementById("banner-overlay");
       overlay.addEventListener("click", function (e) {
         const activeBanner = overlay.querySelector(".banner-fotos.visible");
@@ -499,7 +466,6 @@
         }
       });
 
-      // Funciones globales
       window.abrirBanner = function (id) {
         document.getElementById("banner-overlay").classList.add("visible");
         document.getElementById(id).classList.add("visible");
@@ -510,18 +476,61 @@
         document.getElementById("banner-overlay").classList.remove("visible");
       };
 
-      // Vncular botones "Reservar" con el formulario
       document.querySelectorAll(".reservar-banner").forEach(boton => {
         boton.addEventListener("click", () => {
           const banner = boton.closest(".banner-fotos");
           const titulo = banner.querySelector(".titulo-banner").textContent;
-          // Guardar el título en localStorage para que lo lea el formulario
           localStorage.setItem("zonaSeleccionada", titulo);
-          // Abrir el formulario en una nueva pestaña/ventana
           window.open("../../formularios/reservar.html", "_blank");
         });
       });
     });
   </script>
 
+  <div id="tyc-container"></div>
+
+  <script>
+    const basePath = "../../";
+
+    window.bannerConfig = {
+      cssRuta: basePath + "smk/css/tyc/banner.css",
+      linkRuta: basePath + "smk/tyc/",
+      rechazarRuta: basePath + "barra/ver_carta_completa/"
+    };
+
+    fetch(basePath + "smk/tyc/banner.html")
+      .then(res => res.text())
+      .then(html => {
+        const container = document.getElementById("tyc-container");
+        if (!container) return;
+        container.innerHTML = html;
+
+        if (window.bannerConfig.cssRuta) {
+          const css = document.createElement("link");
+          css.rel = "stylesheet";
+          css.href = window.bannerConfig.cssRuta;
+          document.head.appendChild(css);
+        }
+
+        const script = document.createElement("script");
+        script.src = basePath + "smk/tyc/banner.js";
+        script.onload = () => {
+          if (typeof iniciarBannerTyC === "function") {
+            iniciarBannerTyC();
+          }
+        };
+        document.body.appendChild(script);
+
+        const linkTyc = container.querySelector("#link-tyc");
+        if (linkTyc) linkTyc.href = window.bannerConfig.linkRuta;
+
+        const btnRechazar = container.querySelector("#btn-rechazar-tyc");
+        if (btnRechazar) {
+          btnRechazar.addEventListener("click", () => {
+            window.location.href = window.bannerConfig.rechazarRuta;
+          });
+        }
+      })
+      .catch(err => console.error("Error cargando banner TyC:", err));
+  </script>
 </body>

@@ -2,8 +2,6 @@
 (function () {
   // Expone el objeto de enlaces para que sea accesible globalmente
   window.enlaces = {
-    "reponame": "/70",
-
     "btn-barra": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxE9e4HX11amRop4QF0FArkSShevv2sQRbpFV-va_5Uev-WJtngJBjdo8iEkqPw4AolSnj93A2L-eJ/pub?gid=468733110&single=true&output=tsv",
     "btn-eventos": "eventos/",
     "btn-momentos": "momentos/",

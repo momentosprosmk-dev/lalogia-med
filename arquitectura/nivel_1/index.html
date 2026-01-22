@@ -430,117 +430,128 @@
       </div>
     </div>
 
-  <div id="tyc-container"></div>
-  
-  <script script src="../../data/links.js"></script>
+  <script src="estructura.js"></script>
 
-    <script>
-      function repoPath(path) {
-        const base = window.enlaces?.reponame || "";
-        return `${base}${path}`;
-      }
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const carruseles = document.querySelectorAll(".carrusel");
+      carruseles.forEach((carrusel) => {
+        let indice = 0;
+        const contenedor = carrusel.querySelector(".imagen-contenedor");
+        if (!contenedor) return;
 
-      fetch(repoPath("/smk/tyc/banner.html"))
-        .then((res) => res.text())
-        .then((html) => {
-          const container = document.getElementById("tyc-container");
-          if (!container) return;
-          container.innerHTML = html;
+        const imagenes = contenedor.querySelectorAll("img");
+        if (imagenes.length === 0) return;
 
-          const script = document.createElement("script");
-          script.src = repoPath("/smk/tyc/banner.js");
-          script.onload = () => {
-            if (typeof iniciarBannerTyC === "function") {
-              iniciarBannerTyC();
-            }
-          };
-          document.body.appendChild(script);
-        })
-        .catch((err) => console.error("Error cargando banner TyC:", err));
-    </script>
+        const mostrarImagen = (i) => {
+          imagenes.forEach((img) => img.classList.remove("imagen-activa"));
+          imagenes[i].classList.add("imagen-activa");
+        };
 
-<!-- Script para generar tabla y botones -->
-<script src="estructura.js"></script>
+        const flechaIzq = carrusel.querySelector(".flecha.izquierda");
+        const flechaDer = carrusel.querySelector(".flecha.derecha");
 
-<!-- Script genérico para carruseles y banners -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Carruseles
-    const carruseles = document.querySelectorAll(".carrusel");
-    carruseles.forEach((carrusel) => {
-      let indice = 0;
-      const contenedor = carrusel.querySelector(".imagen-contenedor");
-      if (!contenedor) return; // Validación
+        if (flechaIzq) {
+          flechaIzq.addEventListener("click", () => {
+            indice = (indice - 1 + imagenes.length) % imagenes.length;
+            mostrarImagen(indice);
+          });
+        }
 
-      const imagenes = contenedor.querySelectorAll("img");
-      if (imagenes.length === 0) return; // Validación
-
-      const mostrarImagen = (i) => {
-        imagenes.forEach((img) => img.classList.remove("imagen-activa"));
-        imagenes[i].classList.add("imagen-activa");
-      };
-
-      const flechaIzq = carrusel.querySelector(".flecha.izquierda");
-      const flechaDer = carrusel.querySelector(".flecha.derecha");
-
-      if (flechaIzq) {
-        flechaIzq.addEventListener("click", () => {
-          indice = (indice - 1 + imagenes.length) % imagenes.length;
-          mostrarImagen(indice);
-        });
-      }
-
-      if (flechaDer) {
-        flechaDer.addEventListener("click", () => {
-          indice = (indice + 1) % imagenes.length;
-          mostrarImagen(indice);
-        });
-      }
-    });
-
-    // Cierre al hacer clic fuera del banner
-    const overlay = document.getElementById("banner-overlay");
-    if (overlay) {
-      overlay.addEventListener("click", function (e) {
-        const activeBanner = overlay.querySelector(".banner-fotos.visible");
-        if (activeBanner && !activeBanner.contains(e.target)) {
-          activeBanner.classList.remove("visible");
-          overlay.classList.remove("visible");
+        if (flechaDer) {
+          flechaDer.addEventListener("click", () => {
+            indice = (indice + 1) % imagenes.length;
+            mostrarImagen(indice);
+          });
         }
       });
-    }
 
-    // Funciones globales
-    window.abrirBanner = function (id) {
       const overlay = document.getElementById("banner-overlay");
-      const banner = document.getElementById(id);
-      if (overlay && banner) {
-        overlay.classList.add("visible");
-        banner.classList.add("visible");
+      if (overlay) {
+        overlay.addEventListener("click", function (e) {
+          const activeBanner = overlay.querySelector(".banner-fotos.visible");
+          if (activeBanner && !activeBanner.contains(e.target)) {
+            activeBanner.classList.remove("visible");
+            overlay.classList.remove("visible");
+          }
+        });
       }
-    };
 
-    window.cerrarBanner = function (id) {
-      const overlay = document.getElementById("banner-overlay");
-      const banner = document.getElementById(id);
-      if (overlay && banner) {
-        banner.classList.remove("visible");
-        overlay.classList.remove("visible");
-      }
-    };
+      window.abrirBanner = function (id) {
+        const overlay = document.getElementById("banner-overlay");
+        const banner = document.getElementById(id);
+        if (overlay && banner) {
+          overlay.classList.add("visible");
+          banner.classList.add("visible");
+        }
+      };
 
-    // Vincular botones "Reservar" con el formulario
-    document.querySelectorAll(".reservar-banner").forEach((boton) => {
-      boton.addEventListener("click", () => {
-        const banner = boton.closest(".banner-fotos");
-        if (!banner) return;
-        const titulo = banner.querySelector(".titulo-banner")?.textContent || "";
-        localStorage.setItem("zonaSeleccionada", titulo);
-        // Redirigir al formulario
-        window.open("../../formularios/reservar.html", "_blank");
+      window.cerrarBanner = function (id) {
+        const overlay = document.getElementById("banner-overlay");
+        const banner = document.getElementById(id);
+        if (overlay && banner) {
+          banner.classList.remove("visible");
+          overlay.classList.remove("visible");
+        }
+      };
+
+      document.querySelectorAll(".reservar-banner").forEach((boton) => {
+        boton.addEventListener("click", () => {
+          const banner = boton.closest(".banner-fotos");
+          if (!banner) return;
+          const titulo = banner.querySelector(".titulo-banner")?.textContent || "";
+          localStorage.setItem("zonaSeleccionada", titulo);
+          window.open("../../formularios/reservar.html", "_blank");
+        });
       });
     });
-  });
-</script>
+  </script>
+
+  <div id="tyc-container"></div>
+
+  <script>
+    const basePath = "../../";
+
+    window.bannerConfig = {
+      cssRuta: basePath + "smk/css/tyc/banner.css",
+      linkRuta: basePath + "smk/tyc/",
+      rechazarRuta: basePath + "barra/ver_carta_completa/"
+    };
+
+    fetch(basePath + "smk/tyc/banner.html")
+      .then(res => res.text())
+      .then(html => {
+        const container = document.getElementById("tyc-container");
+        if (!container) return;
+        container.innerHTML = html;
+
+        if (window.bannerConfig.cssRuta) {
+          const css = document.createElement("link");
+          css.rel = "stylesheet";
+          css.href = window.bannerConfig.cssRuta;
+          document.head.appendChild(css);
+        }
+
+        const script = document.createElement("script");
+        script.src = basePath + "smk/tyc/banner.js";
+        script.onload = () => {
+          if (typeof iniciarBannerTyC === "function") {
+            iniciarBannerTyC();
+          }
+        };
+        document.body.appendChild(script);
+
+        const linkTyc = container.querySelector("#link-tyc");
+        if (linkTyc) linkTyc.href = window.bannerConfig.linkRuta;
+
+        const btnRechazar = container.querySelector("#btn-rechazar-tyc");
+        if (btnRechazar) {
+          btnRechazar.addEventListener("click", () => {
+            window.location.href = window.bannerConfig.rechazarRuta;
+          });
+        }
+      })
+      .catch(err => console.error("Error cargando banner TyC:", err));
+  </script>
 
 </body>
