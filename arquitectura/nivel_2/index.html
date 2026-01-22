@@ -491,30 +491,30 @@
   <div id="tyc-container"></div>
 
   <script>
-    const basePath = window.enlaces?.reponame || "../../";
+    let rutaBaseManual = "../../";  
+
+    const rutaBase = rutaBaseManual || (window.enlaces?.reponame || "");
 
     window.bannerConfig = {
-      cssRuta: basePath + "smk/css/tyc/banner.css",
-      linkRuta: basePath + "smk/tyc/",
-      rechazarRuta: basePath + "barra/ver_carta_completa/"
+      cssRuta: rutaBase + "smk/css/tyc/banner.css",
+      linkRuta: rutaBase + "smk/tyc/",
+      rechazarRuta: rutaBase + "barra/ver_carta_completa/"
     };
 
-    fetch(basePath + "smk/tyc/banner.html")
+    fetch(rutaBase + "smk/tyc/banner.html")
       .then(res => res.text())
       .then(html => {
         const container = document.getElementById("tyc-container");
         if (!container) return;
         container.innerHTML = html;
 
-        if (window.bannerConfig.cssRuta) {
-          const css = document.createElement("link");
-          css.rel = "stylesheet";
-          css.href = window.bannerConfig.cssRuta;
-          document.head.appendChild(css);
-        }
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = window.bannerConfig.cssRuta;
+        document.head.appendChild(css);
 
         const script = document.createElement("script");
-        script.src = basePath + "smk/tyc/banner.js";
+        script.src = rutaBase + "smk/tyc/banner.js";
         script.onload = () => {
           if (typeof iniciarBannerTyC === "function") {
             iniciarBannerTyC();
