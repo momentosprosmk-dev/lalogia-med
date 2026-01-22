@@ -6,7 +6,6 @@
   <title>Portal - La Logia</title>
   <link rel="icon" href="media/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="css/index.css" />
-  <link rel="stylesheet" href="smk/css/tyc/banner.css" />
 
 </head>
 <body>
@@ -72,31 +71,36 @@
   </div>
 
   <div id="tyc-container"></div>
-  
+
   <script src="data/footer.js" defer></script>
   <script src="data/links.js" defer></script>
   <script src="data/arquitectura/bienvenida.js" defer></script>
   <script src="data/index.js" defer></script>
 
   <script>
-    fetch("smk/tyc/banner.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("tyc-container").innerHTML = html;
+    function repoPath(path) {
+      const base = window.enlaces?.reponame || "";
+      return `${base}${path}`;
+    }
 
-        // Esperamos un breve momento para asegurar que el DOM se actualice
-        setTimeout(() => {
-          const script = document.createElement("script");
-          script.src = "smk/tyc/banner.js";
-          script.onload = () => {
-            if (typeof iniciarBannerTyC === "function") {
-              iniciarBannerTyC();
-            }
-          };
-          document.body.appendChild(script);
-        }, 50);
+    fetch(repoPath("/smk/tyc/banner.html"))
+      .then((res) => res.text())
+      .then((html) => {
+        const container = document.getElementById("tyc-container");
+        if (!container) return;
+        container.innerHTML = html;
+
+        const script = document.createElement("script");
+        script.src = repoPath("/smk/tyc/banner.js");
+        script.onload = () => {
+          if (typeof iniciarBannerTyC === "function") {
+            iniciarBannerTyC();
+          }
+        };
+        document.body.appendChild(script);
       })
-      .catch(err => console.error("Error cargando banner TyC:", err));
+      .catch((err) => console.error("Error cargando banner TyC:", err));
   </script>
+
 </body>
 </html>

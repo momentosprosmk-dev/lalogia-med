@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
   <!-- Contenedor del plano institucional -->
   <div id="plano-container">
     <div style="position: relative;">
@@ -29,7 +28,7 @@
   </div>
 
 
-  <!-- Overlay oscuro + todos los banners -->
+  <!-- Banners -->
   <div id="banner-overlay" class="overlay">
     <!-- Banner: Lobby1 -->
     <div id="bnlobby1" class="banner-fotos" style="display: none;">
@@ -431,38 +430,77 @@
       </div>
     </div>
 
+  <div id="tyc-container"></div>
   
-  <!-- Script para generar tabla y botones -->
-  <script src="estructura.js"></script>
+  <script script src="../../data/links.js"></script>
+
+    <script>
+      function repoPath(path) {
+        const base = window.enlaces?.reponame || "";
+        return `${base}${path}`;
+      }
+
+      fetch(repoPath("/smk/tyc/banner.html"))
+        .then((res) => res.text())
+        .then((html) => {
+          const container = document.getElementById("tyc-container");
+          if (!container) return;
+          container.innerHTML = html;
+
+          const script = document.createElement("script");
+          script.src = repoPath("/smk/tyc/banner.js");
+          script.onload = () => {
+            if (typeof iniciarBannerTyC === "function") {
+              iniciarBannerTyC();
+            }
+          };
+          document.body.appendChild(script);
+        })
+        .catch((err) => console.error("Error cargando banner TyC:", err));
+    </script>
+
+<!-- Script para generar tabla y botones -->
+<script src="estructura.js"></script>
 
 <!-- Script genérico para carruseles y banners -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Carruseles
-      const carruseles = document.querySelectorAll(".carrusel");
-      carruseles.forEach((carrusel) => {
-        let indice = 0;
-        const contenedor = carrusel.querySelector(".imagen-contenedor");
-        const imagenes = contenedor.querySelectorAll("img");
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Carruseles
+    const carruseles = document.querySelectorAll(".carrusel");
+    carruseles.forEach((carrusel) => {
+      let indice = 0;
+      const contenedor = carrusel.querySelector(".imagen-contenedor");
+      if (!contenedor) return; // Validación
 
-        const mostrarImagen = (i) => {
-          imagenes.forEach((img) => img.classList.remove("imagen-activa"));
-          imagenes[i].classList.add("imagen-activa");
-        };
+      const imagenes = contenedor.querySelectorAll("img");
+      if (imagenes.length === 0) return; // Validación
 
-        carrusel.querySelector(".flecha.izquierda").addEventListener("click", () => {
+      const mostrarImagen = (i) => {
+        imagenes.forEach((img) => img.classList.remove("imagen-activa"));
+        imagenes[i].classList.add("imagen-activa");
+      };
+
+      const flechaIzq = carrusel.querySelector(".flecha.izquierda");
+      const flechaDer = carrusel.querySelector(".flecha.derecha");
+
+      if (flechaIzq) {
+        flechaIzq.addEventListener("click", () => {
           indice = (indice - 1 + imagenes.length) % imagenes.length;
           mostrarImagen(indice);
         });
+      }
 
-        carrusel.querySelector(".flecha.derecha").addEventListener("click", () => {
+      if (flechaDer) {
+        flechaDer.addEventListener("click", () => {
           indice = (indice + 1) % imagenes.length;
           mostrarImagen(indice);
         });
-      });
+      }
+    });
 
-      // Cierre al hacer clic fuera del banner
-      const overlay = document.getElementById("banner-overlay");
+    // Cierre al hacer clic fuera del banner
+    const overlay = document.getElementById("banner-overlay");
+    if (overlay) {
       overlay.addEventListener("click", function (e) {
         const activeBanner = overlay.querySelector(".banner-fotos.visible");
         if (activeBanner && !activeBanner.contains(e.target)) {
@@ -470,32 +508,39 @@
           overlay.classList.remove("visible");
         }
       });
+    }
 
-      // Funciones globales
-      window.abrirBanner = function (id) {
-        document.getElementById("banner-overlay").classList.add("visible");
-        document.getElementById(id).classList.add("visible");
-      };
+    // Funciones globales
+    window.abrirBanner = function (id) {
+      const overlay = document.getElementById("banner-overlay");
+      const banner = document.getElementById(id);
+      if (overlay && banner) {
+        overlay.classList.add("visible");
+        banner.classList.add("visible");
+      }
+    };
 
-      window.cerrarBanner = function (id) {
-        document.getElementById(id).classList.remove("visible");
-        document.getElementById("banner-overlay").classList.remove("visible");
-      };
+    window.cerrarBanner = function (id) {
+      const overlay = document.getElementById("banner-overlay");
+      const banner = document.getElementById(id);
+      if (overlay && banner) {
+        banner.classList.remove("visible");
+        overlay.classList.remove("visible");
+      }
+    };
 
-      // Vincular botones "Reservar" con el formulario
-      document.querySelectorAll(".reservar-banner").forEach(boton => {
-        boton.addEventListener("click", () => {
-          const banner = boton.closest(".banner-fotos");
-          const titulo = banner.querySelector(".titulo-banner").textContent;
-          // Guardar el título en localStorage para que lo lea el formulario
-          localStorage.setItem("zonaSeleccionada", titulo);
-          // Redirigir al formulario
-          window.open("../../formularios/reservar.html", "_blank");
-        });
+    // Vincular botones "Reservar" con el formulario
+    document.querySelectorAll(".reservar-banner").forEach((boton) => {
+      boton.addEventListener("click", () => {
+        const banner = boton.closest(".banner-fotos");
+        if (!banner) return;
+        const titulo = banner.querySelector(".titulo-banner")?.textContent || "";
+        localStorage.setItem("zonaSeleccionada", titulo);
+        // Redirigir al formulario
+        window.open("../../formularios/reservar.html", "_blank");
       });
     });
-  </script>
+  });
+</script>
 
-  <!-- Script para asignar enlaces dinámicos -->
-  <script src="../../data/links.js"></script>
 </body>

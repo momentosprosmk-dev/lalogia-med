@@ -18,11 +18,11 @@ function iniciarBannerTyC() {
 
   btnRechazar.addEventListener("click", () => {
     localStorage.setItem("tyc", "0");
-    window.location.href = "barra/ver_carta_completa/";
+    window.location.href = "/barra/ver_carta_completa/";
   });
 
   linkTyc.addEventListener("click", (e) => {
     e.preventDefault();
-    window.location.href = "smk/tyc/";
+    window.location.href = "/smk/tyc/";
   });
 }

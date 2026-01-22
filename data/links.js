@@ -2,6 +2,8 @@
 (function () {
   // Expone el objeto de enlaces para que sea accesible globalmente
   window.enlaces = {
+    "reponame": "",
+
     "btn-barra": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxE9e4HX11amRop4QF0FArkSShevv2sQRbpFV-va_5Uev-WJtngJBjdo8iEkqPw4AolSnj93A2L-eJ/pub?gid=468733110&single=true&output=tsv",
     "btn-eventos": "eventos/",
     "btn-momentos": "momentos/",
@@ -28,7 +30,6 @@
     "nacional": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1KrtZEOenonnjeQzKLwgiCDL9XO7xNNecHtGjvh2LCatAGjwxUWzNd-z7G2adqA/pub?gid=1757127141&single=true&output=tsv",
     "bebidas": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1KrtZEOenonnjeQzKLwgiCDL9XO7xNNecHtGjvh2LCatAGjwxUWzNd-z7G2adqA/pub?gid=1623498576&single=true&output=tsv",
     "vercartacompleta": "",
-
 
     "reservar_licor_data": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxE9e4HX11amRop4QF0FArkSShevv2sQRbpFV-va_5Uev-WJtngJBjdo8iEkqPw4AolSnj93A2L-eJ/pub?gid=0&single=true&output=tsv",
     "numero-local": "573202877325",

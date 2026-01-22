@@ -431,6 +431,35 @@
       </div>
     </div>
   
+  <div id="tyc-container"></div>
+  
+  <script script src="../../data/links.js"></script>
+
+    <script>
+      function repoPath(path) {
+        const base = window.enlaces?.reponame || "";
+        return `${base}${path}`;
+      }
+
+      fetch(repoPath("/smk/tyc/banner.html"))
+        .then((res) => res.text())
+        .then((html) => {
+          const container = document.getElementById("tyc-container");
+          if (!container) return;
+          container.innerHTML = html;
+
+          const script = document.createElement("script");
+          script.src = repoPath("/smk/tyc/banner.js");
+          script.onload = () => {
+            if (typeof iniciarBannerTyC === "function") {
+              iniciarBannerTyC();
+            }
+          };
+          document.body.appendChild(script);
+        })
+        .catch((err) => console.error("Error cargando banner TyC:", err));
+    </script>
+  
   <!-- Script para generar tabla y botones -->
   <script src="estructura.js"></script>
 
@@ -495,6 +524,4 @@
     });
   </script>
 
-  <!-- Script para asignar enlaces dinámicos -->
-  <script src="../../data/links.js"></script>
 </body>
