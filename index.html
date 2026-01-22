@@ -78,7 +78,7 @@
   <div id="tyc-container"></div>
 
   <script>
-    const basePath = "70/";
+    const basePath = window.enlaces?.reponame || "";
 
     window.bannerConfig = {
       cssRuta: basePath + "smk/css/tyc/banner.css",
@@ -93,6 +93,7 @@
         if (!container) return;
         container.innerHTML = html;
 
+        // Inyectar CSS
         if (window.bannerConfig.cssRuta) {
           const css = document.createElement("link");
           css.rel = "stylesheet";
@@ -100,6 +101,7 @@
           document.head.appendChild(css);
         }
 
+        // Cargar JS del banner
         const script = document.createElement("script");
         script.src = basePath + "smk/tyc/banner.js";
         script.onload = () => {
@@ -109,6 +111,7 @@
         };
         document.body.appendChild(script);
 
+        // Ajustar rutas dinámicamente
         const linkTyc = container.querySelector("#link-tyc");
         if (linkTyc) linkTyc.href = window.bannerConfig.linkRuta;
 
