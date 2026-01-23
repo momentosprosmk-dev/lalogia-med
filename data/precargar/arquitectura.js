@@ -111,20 +111,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const ext = ruta.split(".").pop();
 
     if (["jpg","jpeg","png","gif","webp"].includes(ext)) {
-      const img = new Image();
-      img.src = ruta;
+      // Solo precargar si no existe ya en cache
+      if (!document.querySelector(`img[src="${ruta}"]`)) {
+        const img = new Image();
+        img.src = ruta;
+      }
     } else if (ext === "css") {
-      const link = document.createElement("link");
-      link.rel = "preload";
-      link.as = "style";
-      link.href = ruta;
-      document.head.appendChild(link);
+      if (!document.querySelector(`link[href="${ruta}"]`)) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = ruta;
+        document.head.appendChild(link);
+      }
     } else if (ext === "js") {
-      const script = document.createElement("link");
-      script.rel = "preload";
-      script.as = "script";
-      script.href = ruta;
-      document.head.appendChild(script);
+      if (!document.querySelector(`script[src="${ruta}"]`)) {
+        const script = document.createElement("script");
+        script.src = ruta;
+        document.head.appendChild(script);
+      }
     }
   });
 });
