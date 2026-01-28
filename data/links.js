@@ -1,9 +1,7 @@
-// IIFE para evitar fugas de variables
 (function () {
-  // Expone el objeto de enlaces para que sea accesible globalmente
   window.enlaces = {
-    reponame: "70/",
 
+    "reponame": "70/",
     "btn-barra": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxE9e4HX11amRop4QF0FArkSShevv2sQRbpFV-va_5Uev-WJtngJBjdo8iEkqPw4AolSnj93A2L-eJ/pub?gid=468733110&single=true&output=tsv",
     "btn-eventos": "eventos/",
     "btn-momentos": "momentos/",
@@ -36,18 +34,41 @@
     "npersonas": 8
   };
 
-  // Al cargar, asigna los href o listeners a los elementos que existan
-  document.addEventListener("DOMContentLoaded", function () {
-    for (const id in window.enlaces) {
-      const elemento = document.getElementById(id);
-      if (!elemento) continue;
-      if (elemento.tagName === "A") {
-        elemento.setAttribute("href", window.enlaces[id]);
-      } else {
-        elemento.addEventListener("click", function () {
-          window.location.href = window.enlaces[id];
-        });
-      }
+
+  const dominiosExternos = new Set();
+  Object.values(window.enlaces).forEach(valor => {
+    if (typeof valor === "string" && valor.startsWith("https")) {
+      try {
+        const url = new URL(valor);
+        dominiosExternos.add(url.origin);
+      } catch (e) {}
     }
   });
+
+  dominiosExternos.forEach(href => {
+    ["preconnect", "dns-prefetch"].forEach(rel => {
+      const link = document.createElement("link");
+      link.rel = rel;
+      link.href = href;
+      document.head.appendChild(link);
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    Object.keys(window.enlaces).forEach(id => {
+      const valor = window.enlaces[id];
+      const elemento = document.getElementById(id);
+
+      if (!elemento || !valor) return;
+
+      if (elemento.tagName === "A") {
+        elemento.setAttribute("href", valor);
+      } else {
+        elemento.addEventListener("click", () => {
+          window.location.href = valor;
+        });
+      }
+    });
+  });
 })();
+
