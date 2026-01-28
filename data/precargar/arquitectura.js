@@ -111,24 +111,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const ext = ruta.split(".").pop();
 
     if (["avif","jpeg","png","gif","webp"].includes(ext)) {
-      // Solo precargar si no existe ya en cache
-      if (!document.querySelector(`img[src="${ruta}"]`)) {
-        const img = new Image();
-        img.src = ruta;
-      }
+      // Preload de imágenes
+      const img = new Image();
+      img.src = ruta;
+
     } else if (ext === "css") {
-      if (!document.querySelector(`link[href="${ruta}"]`)) {
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = ruta;
-        document.head.appendChild(link);
-      }
+      // Preload del CSS
+      const preload = document.createElement("link");
+      preload.rel = "preload";
+      preload.as = "style";
+      preload.href = ruta;
+      document.head.appendChild(preload);
+
+      // Aplicar el CSS
+      const stylesheet = document.createElement("link");
+      stylesheet.rel = "stylesheet";
+      stylesheet.href = ruta;
+      document.head.appendChild(stylesheet);
+
     } else if (ext === "js") {
-      if (!document.querySelector(`script[src="${ruta}"]`)) {
-        const script = document.createElement("script");
-        script.src = ruta;
-        document.head.appendChild(script);
-      }
+      // Preload de scripts
+      const preloadScript = document.createElement("link");
+      preloadScript.rel = "preload";
+      preloadScript.as = "script";
+      preloadScript.href = ruta;
+      document.head.appendChild(preloadScript);
+
+      // Cargar el script
+      const script = document.createElement("script");
+      script.src = ruta;
+      document.head.appendChild(script);
     }
   });
 });

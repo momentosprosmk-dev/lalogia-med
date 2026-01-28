@@ -142,19 +142,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const ext = ruta.split(".").pop();
 
     if (["avif","jpeg","png","gif","webp"].includes(ext)) {
+      // Preload de imágenes
       const img = new Image();
       img.src = ruta;
+
     } else if (ext === "css") {
-      const link = document.createElement("link");
-      link.rel = "preload";
-      link.as = "style";
-      link.href = ruta;
-      document.head.appendChild(link);
+      // Preload del CSS
+      const preload = document.createElement("link");
+      preload.rel = "preload";
+      preload.as = "style";
+      preload.href = ruta;
+      document.head.appendChild(preload);
+
+      // Aplicar el CSS
+      const stylesheet = document.createElement("link");
+      stylesheet.rel = "stylesheet";
+      stylesheet.href = ruta;
+      document.head.appendChild(stylesheet);
+
     } else if (ext === "js") {
-      const script = document.createElement("link");
-      script.rel = "preload";
-      script.as = "script";
-      script.href = ruta;
+      // Preload de scripts
+      const preloadScript = document.createElement("link");
+      preloadScript.rel = "preload";
+      preloadScript.as = "script";
+      preloadScript.href = ruta;
+      document.head.appendChild(preloadScript);
+
+      // Cargar el script
+      const script = document.createElement("script");
+      script.src = ruta;
       document.head.appendChild(script);
     }
   });
