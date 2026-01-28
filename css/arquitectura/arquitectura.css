@@ -76,7 +76,7 @@ html, body {
   justify-content: flex-start;
   align-items: center;
   z-index: 999;
-  background: url('../../media/arquitectura/arquitectura.jpg') center/cover no-repeat;
+  background: url('../../media/arquitectura/arquitectura.avif') center/cover no-repeat;
   border: 2px solid #b8860b;
   border-radius: 12px;
   box-shadow: 0 0 30px rgba(212,175,55,.7),
