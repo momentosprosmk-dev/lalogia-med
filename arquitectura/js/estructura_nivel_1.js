@@ -26,7 +26,7 @@ function crearBoton({ idDestino, texto, clase, columna, filas }) {
   // Usar sistema modular de banners
   enlace.addEventListener('click', (event) => {
     event.preventDefault();
-    abrirBanner(idDestino); // activa el overlay y muestra el banner
+    abrirBanner(idDestino);
   });
 
   contenedor.appendChild(enlace);

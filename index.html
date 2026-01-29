@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Configuración básica del documento -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal - La Logia</title>
-  <link rel="icon" href="media/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="css/index.css" />
 
+  <!-- Favicon del sitio -->
+  <link rel="icon" href="media/favicon.ico" type="image/x-icon" />
+
+  <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" href="css/index.css" />
 </head>
 <body>
 
+  <!-- Contenedor dinámico para el banner de Términos y Condiciones -->
   <div id="tyc-container"></div>
 
   <!--=============== Encabezado ===============-->
   <header>
+    <!-- Logo principal -->
     <img src="media/index_logo.avif" alt="Logo Iluminati" class="logo-img" />
   </header>
 
-  <!--=============== Botones ===============-->
+  <!--=============== Botones principales ===============-->
   <div class="recuadro">
+    <!-- Cada botón se enlaza dinámicamente desde links.js -->
     <a id="btn-barra" class="bt-opc" href="#">ofertas</a>
     <!--<a id="btn-arquitectura" class="bt-opc">explorar templo</a>-->
     <a id="btn-eventos" class="bt-opc">rituales</a>
@@ -36,7 +43,8 @@
     </div>
   </footer>
 
-  <!--=============== Banners ===============-->
+  <!--=============== Banners dinámicos ===============-->
+  <!-- Banner de arquitectura -->
   <div id="banner-arquitectura" class="bn-arq">
     <div class="bn-arq-content">
       <h2 id="mensaje-arquitectura" class="msg-arq"></h2>
@@ -47,6 +55,7 @@
     </div>
   </div>
 
+  <!-- Banner de WiFi -->
   <div id="banner-wifi" class="bn-wifi">
     <div class="bn-wifi-content">
       <h2 class="bn-wifi-titulo">CONÉCTATE</h2>
@@ -55,6 +64,7 @@
     </div>
   </div>
 
+  <!-- Banner de contacto -->
   <div id="contacto-banner" class="contacto-banner">
     <div class="contacto-content">
       <h2 class="contacto-titulo">CONTACTO</h2>
@@ -65,6 +75,7 @@
     </div>
   </div>
 
+  <!-- Banner para compartir la web -->
   <div id="qrweb-banner" class="bn-wifi">
     <div class="bn-wifi-content">
       <h2 class="bn-wifi-titulo">COMPARTIR WEB</h2>
@@ -73,22 +84,29 @@
     </div>
   </div>
 
+  <!--=============== Scripts ===============-->
+  <!-- Scripts externos para modularidad -->
   <script src="data/footer.js" defer></script>
   <script src="data/links.js" defer></script>
   <script src="data/arquitectura/bienvenida.js" defer></script>
   <script src="data/index.js" defer></script>
 
+  <!-- Script inline para cargar dinámicamente el banner de TyC -->
   <script>
+    // Permite definir manualmente una ruta base si es necesario
     let rutaBaseManual = "";  
 
+    // Usa la ruta manual o la definida en window.enlaces
     const rutaBase = rutaBaseManual || (window.enlaces?.reponame || "");
 
+    // Configuración del banner TyC
     window.bannerConfig = {
       cssRuta: rutaBase + "smk/css/tyc/banner.css",
       linkRuta: rutaBase + "smk/tyc/",
       rechazarRuta: rutaBase + "barra/ver_carta_completa/"
     };
 
+    // Carga dinámica del HTML del banner TyC
     fetch(rutaBase + "smk/tyc/banner.html")
       .then(res => res.text())
       .then(html => {
@@ -96,11 +114,13 @@
         if (!container) return;
         container.innerHTML = html;
 
+        // Inyecta el CSS del banner
         const css = document.createElement("link");
         css.rel = "stylesheet";
         css.href = window.bannerConfig.cssRuta;
         document.head.appendChild(css);
 
+        // Inyecta el JS del banner y ejecuta la función de inicialización
         const script = document.createElement("script");
         script.src = rutaBase + "smk/tyc/banner.js";
         script.onload = () => {
@@ -110,9 +130,11 @@
         };
         document.body.appendChild(script);
 
+        // Configura el enlace de TyC dentro del banner
         const linkTyc = container.querySelector("#link-tyc");
         if (linkTyc) linkTyc.href = window.bannerConfig.linkRuta;
 
+        // Configura el botón de rechazo para redirigir
         const btnRechazar = container.querySelector("#btn-rechazar-tyc");
         if (btnRechazar) {
           btnRechazar.addEventListener("click", () => {

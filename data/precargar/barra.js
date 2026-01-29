@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const basecss   = "../css/barra/";
-  const basemedia = "../media/barra/";
+  //const basecss   = "../../css/barra/";
+  const basemedia = "../../media/barra/";
 
   const recursos = [
-    basecss   + "barra.css",
-    basecss   + "licores.css",
-    basecss   + "ver_carta_completa.css",
+    //basecss   + "licores.css",
+    //basecss   + "ver_carta_completa.css",
 
     basemedia + "bebidas/agua.avif",
     basemedia + "bebidas/agua_tonica_mil976_cero_calorias.avif",
