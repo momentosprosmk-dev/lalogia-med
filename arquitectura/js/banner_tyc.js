@@ -3,8 +3,8 @@
   const rutaBaseManual = "../../";  
   const rutaBase = rutaBaseManual || (window.enlaces?.reponame || "");
 
-  // Configuración centralizada del banner TyC
-  const bannerConfig = {
+  // Configuración centralizada del banner TyC en objeto global
+  window.bannerConfig = {
     cssRuta: rutaBase + "smk/css/tyc/banner.css",
     linkRuta: rutaBase + "smk/tyc/",
     rechazarRuta: rutaBase + "barra/ver_carta_completa/"
@@ -21,7 +21,7 @@
       // Inyecta el CSS del banner
       const css = document.createElement("link");
       css.rel = "stylesheet";
-      css.href = bannerConfig.cssRuta;
+      css.href = window.bannerConfig.cssRuta;
       document.head.appendChild(css);
 
       // Inyecta el JS del banner y ejecuta la función de inicialización
@@ -33,18 +33,6 @@
         }
       };
       document.body.appendChild(script);
-
-      // Configura el enlace de TyC dentro del banner
-      const linkTyc = container.querySelector("#link-tyc");
-      if (linkTyc) linkTyc.href = bannerConfig.linkRuta;
-
-      // Configura el botón de rechazo para redirigir
-      const btnRechazar = container.querySelector("#btn-rechazar-tyc");
-      if (btnRechazar) {
-        btnRechazar.addEventListener("click", () => {
-          window.location.href = bannerConfig.rechazarRuta;
-        });
-      }
     })
     .catch(err => console.error("Error cargando banner TyC:", err));
 })();
