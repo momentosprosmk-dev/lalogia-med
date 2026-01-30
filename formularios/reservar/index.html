@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
   <title>Formulario de Reservas - La Logia</title>
-  <link rel="icon" href="../media/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="../css/formularios/reservar.css">
-  <script src="../data/links.js"></script>
-  <script src="../data/formularios/indicativos.js"></script>
+  <link rel="icon" href="../../media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="../../css/formularios/reservar.css">
+  <script src="../../data/links.js"></script>
+  <script src="../js/reservar_indicativos.js"></script>
 </head>
 <body>
   <!-- Encabezado fijo -->
@@ -80,182 +80,13 @@
     </button>
   </footer>
 
-  <script>
-    // Cargar indicativos
-    cargarIndicativos();
-
-    // Zona seleccionada
-    const zona = localStorage.getItem("zonaSeleccionada");
-    const zonaContainer = document.getElementById("zonaContainer");
-
-    if (zona && zona !== "Zona no especificada") {
-      zonaContainer.innerHTML = `<div class="field"><p id="zonaSeleccionada">Zona seleccionada: ${zona}</p></div>`;
-    } else {
-      zonaContainer.innerHTML = `
-        <div class="field">
-          <label for="zonaSeleccionada">Seleccione zona:</label>
-          <select id="zonaSeleccionada" required>
-            <option value="">--Seleccione--</option>
-            <option value="Palco">Palco - Primer piso</option>
-            <option value="Palco">Palco - Segundo piso</option>
-            <option value="VIP">VIP</option>
-            <option value="Mesa general">Mesa general</option>
-          </select>
-        </div>
-      `;
-    }
-
-    // Variables principales
-    const numeroLocal = window.enlaces["numero-local"];
-    const contactoInput = document.getElementById("contacto");
-    const submitBtn = document.getElementById("submitBtn");
-
-    // Formatear teléfono
-    contactoInput.addEventListener("input", function(e) {
-      let valor = e.target.value.replace(/\D/g, "");
-      if (valor.length > 0) {
-        valor = valor.replace(/^(\d{3})(\d{3})(\d{0,4}).*/, "($1) $2-$3");
-      }
-      e.target.value = valor;
-      validarFormulario();
-    });
-
-    // Cargar licores con anti‑caché
-    async function cargarLicores() {
-      try {
-        const response = await fetch(window.enlaces["reservar_licor_data"] + "&t=" + Date.now());
-        const text = await response.text();
-        const lineas = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
-        const selectLicor = document.getElementById("reservar-licor");
-
-        const encabezados = lineas[0].split("\t");
-        const idxTipo = encabezados.indexOf("tipo");
-        const idxReservar = encabezados.indexOf("reservar");
-
-        lineas.slice(1).forEach(linea => {
-          const columnas = linea.split("\t");
-          const tipo = columnas[idxTipo];
-          const reservar = columnas[idxReservar];
-
-          if (tipo && reservar.toLowerCase() === "d") {
-            const option = document.createElement("option");
-            option.value = tipo;
-            option.textContent = tipo;
-            selectLicor.appendChild(option);
-          }
-        });
-      } catch (error) {
-        console.error("Error cargando licores:", error);
-      }
-    }
-    cargarLicores();
-
-    // Validar formulario
-    function validarFormulario() {
-      const nombre = document.getElementById("nombre").value.trim();
-      const paisSeleccionado = document.getElementById("codigoPais").value.trim();
-      const contacto = document.getElementById("contacto").value.trim();
-      const personas = document.getElementById("personas").value.trim();
-      const licor = document.getElementById("reservar-licor").value.trim();
-      const cumple = document.getElementById("cumple").value.trim();
-      const fecha = document.getElementById("fecha").value.trim();
-      const zonaFinal = zona && zona !== "Zona no especificada" 
-        ? zona 
-        : document.getElementById("zonaSeleccionada").value.trim();
-
-      if (nombre && paisSeleccionado && contacto && personas && licor && cumple && fecha && zonaFinal) {
-        submitBtn.disabled = false;
-        submitBtn.classList.remove("disabled");
-      } else {
-        submitBtn.disabled = true;
-        submitBtn.classList.add("disabled");
-      }
-    }
-
-    // Escuchar cambios en inputs
-    document.querySelectorAll("#reservaForm input, #reservaForm select").forEach(el => {
-      el.addEventListener("input", validarFormulario);
-      el.addEventListener("change", validarFormulario);
-    });
-
-    // Mostrar/ocultar cumpleaños según número de personas
-    const personasInput = document.getElementById("personas");
-    const cumpleField = document.getElementById("cumpleField");
-    const cumpleSelect = document.getElementById("cumple");
-
-    cumpleField.style.display = "none";
-    cumpleSelect.removeAttribute("required");
-
-    personasInput.addEventListener("input", function() {
-      const numPersonas = parseInt(personasInput.value, 10);
-
-      if (numPersonas > window.enlaces["npersonas"]) {
-        cumpleField.style.display = "block";
-        cumpleSelect.setAttribute("required", "true");
-      } else {
-        cumpleField.style.display = "none";
-        cumpleSelect.removeAttribute("required");
-        cumpleSelect.value = "";
-      }
-
-      validarFormulario();
-    });
-
-    // Enviar formulario
-    document.getElementById("reservaForm").addEventListener("submit", function(e){
-      e.preventDefault();
-
-      const nombre = document.getElementById("nombre").value;
-      const paisSeleccionado = document.getElementById("codigoPais").value;
-      const contacto = document.getElementById("contacto").value;
-      const personas = document.getElementById("personas").value;
-      const licor = document.getElementById("reservar-licor").value;
-      const cumple = document.getElementById("cumple").value;
-      const fecha = document.getElementById("fecha").value;
-
-      const zonaFinal = zona && zona !== "Zona no especificada" 
-        ? zona 
-        : document.getElementById("zonaSeleccionada").value;
-
-      const pais = window.listaPaises.find(p => paisSeleccionado.includes(p.nombre));
-      const codigoPais = pais ? pais.codigo : "";
-      const telefonoMostrar = `%2B${codigoPais} ${contacto}`;
-
-      const mensaje = `*Fecha:* ${fecha}%0A%0A *Zona:* _${zonaFinal}_%0A *Nombre:* _${nombre}_%0A *Contacto:* _${telefonoMostrar}_%0A *N° Personas:* _${personas} personas_%0A *Licor:* _${licor}_%0A *Cumpleaños:* _${cumple}_`;
-
-      window.open(`https://wa.me/${numeroLocal}?text=${mensaje}`, "_blank");
-      localStorage.removeItem("zonaSeleccionada");
-      window.close();
-    });
-  </script>
-  
-  <script src="../../data/links.js" defer></script>
-
   <div id="tyc-container"></div>
 
-    <script>
-      function repoPath(path) {
-        const base = window.enlaces?.reponame || "";
-        return `${base}${path}`;
-      }
-
-      fetch(repoPath("/smk/tyc/banner.html"))
-        .then((res) => res.text())
-        .then((html) => {
-          const container = document.getElementById("tyc-container");
-          if (!container) return;
-          container.innerHTML = html;
-
-          const script = document.createElement("script");
-          script.src = repoPath("/smk/tyc/banner.js");
-          script.onload = () => {
-            if (typeof iniciarBannerTyC === "function") {
-              iniciarBannerTyC();
-            }
-          };
-          document.body.appendChild(script);
-        })
-        .catch((err) => console.error("Error cargando banner TyC:", err));
-    </script>
+  <script src="../js/banner_tyc.js"></script>
+  <script src="../../data/links.js" defer></script>
+  <script src="../js/reservar_zona.js" defer></script>
+  <script src="../js/reservar_formulario.js" defer></script>
+  <script src="../js/reservar_licores.js" defer></script>
+  <script src="../js/reservar_submit.js" defer></script>
 </body>
 </html>

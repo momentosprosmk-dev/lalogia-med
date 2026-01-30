@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const basecss   = "../../css/arquitectura/";
+  //const basecss   = "../../css/arquitectura/";
   const basemedia = "../../media/arquitectura/";
 
   const recursos = [
-    basecss   + "arquitectura.css",
-    basecss   + "espacios.css",
+    //basecss   + "arquitectura.css",
+    //basecss   + "espacios.css",
 
     basemedia + "arquitectura.avif",
 

@@ -1,12 +1,12 @@
 async function cargarIndicativos() {
   try {
-    const response = await fetch("../data/formularios/paises.json"); 
+    const response = await fetch("../../data/formularios/paises.json"); 
     const paises = await response.json();
 
     const datalist = document.getElementById("listaPaises");
     paises.forEach(p => {
       const option = document.createElement("option");
-      option.value = p.nombre; // solo nombre para buscar
+      option.value = p.nombre;
       datalist.appendChild(option);
     });
 
