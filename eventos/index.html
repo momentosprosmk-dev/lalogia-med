@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../css/otraswebs/otraswebs.css" />
 </head>
 <body>
+  <!-- Contenido principal con visor de eventos -->
   <main class="contenedor">
     <iframe
       src="https://discotecalalogia.com/eventos/"
@@ -18,25 +19,30 @@
     ></iframe>
   </main>
 
+  <!-- Pie de página con botón de regreso -->
   <footer class="footer-fijo">
     <a href="../" class="btn-regresar">⬅ Regresar</a>
   </footer>
   
+  <!-- Script de enlaces globales -->
   <script src="../data/links.js" defer></script>
 
+  <!-- Contenedor para el banner de Términos y Condiciones -->
   <div id="tyc-container"></div>
 
+  <!-- Script para cargar dinámicamente el banner TyC -->
   <script>
     let rutaBaseManual = "../";  
-
     const rutaBase = rutaBaseManual || (window.enlaces?.reponame || "");
 
+    // Configuración centralizada del banner TyC
     window.bannerConfig = {
       cssRuta: rutaBase + "smk/css/tyc/banner.css",
       linkRuta: rutaBase + "smk/tyc/",
       rechazarRuta: rutaBase + "barra/ver_carta_completa/"
     };
 
+    // Carga dinámica del HTML del banner TyC
     fetch(rutaBase + "smk/tyc/banner.html")
       .then(res => res.text())
       .then(html => {
@@ -44,11 +50,13 @@
         if (!container) return;
         container.innerHTML = html;
 
+        // Inyecta el CSS del banner
         const css = document.createElement("link");
         css.rel = "stylesheet";
         css.href = window.bannerConfig.cssRuta;
         document.head.appendChild(css);
 
+        // Inyecta el JS del banner y lo inicializa
         const script = document.createElement("script");
         script.src = rutaBase + "smk/tyc/banner.js";
         script.onload = () => {
@@ -58,9 +66,11 @@
         };
         document.body.appendChild(script);
 
+        // Ajusta enlace de TyC dentro del banner
         const linkTyc = container.querySelector("#link-tyc");
         if (linkTyc) linkTyc.href = window.bannerConfig.linkRuta;
 
+        // Configura acción del botón "rechazar"
         const btnRechazar = container.querySelector("#btn-rechazar-tyc");
         if (btnRechazar) {
           btnRechazar.addEventListener("click", () => {
@@ -68,6 +78,7 @@
           });
         }
       })
+      // Manejo de errores en consola
       .catch(err => console.error("Error cargando banner TyC:", err));
   </script>
 </body>

@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Configuración básica del documento -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal - La Logia</title>
-
-  <!-- Favicon del sitio -->
   <link rel="icon" href="media/favicon.ico" type="image/x-icon" />
-
-  <!-- Hoja de estilos principal -->
   <link rel="stylesheet" href="css/index.css" />
 </head>
 <body>
-  <!--=============== Encabezado ===============-->
+  <!-- Encabezado con logo principal -->
   <header>
-    <!-- Logo principal -->
     <img src="media/index_logo.avif" alt="Logo Iluminati" class="logo-img" />
   </header>
 
-  <!--=============== Botones principales ===============-->
+  <!-- Botones principales de navegación -->
   <div class="recuadro">
-    <!-- Cada botón se enlaza dinámicamente desde links.js -->
     <a id="btn-barra" class="bt-opc" href="#">ofertas</a>
+    <a id="btn-arquitectura" class="bt-opc">explorar templo</a>
     <!--<a id="btn-arquitectura" class="bt-opc">explorar templo</a>-->
     <a id="btn-eventos" class="bt-opc">rituales</a>
     <a id="btn-momentos" class="bt-opc">momentos</a>
@@ -32,15 +26,14 @@
     <a id="btn-qrweb" class="bt-opc">compartir Web</a>
   </div>
 
-  <!--=============== Pie de página ===============-->
+  <!-- Pie de página -->
   <footer class="footer">
     <div class="footer-content">
       <p id="texto-footer">© La Logia</p>
     </div>
   </footer>
 
-  <!--=============== Banners dinámicos ===============-->
-  <!-- Banner de arquitectura -->
+  <!-- Banners dinámicos -->
   <div id="banner-arquitectura" class="bn-arq">
     <div class="bn-arq-content">
       <h2 id="mensaje-arquitectura" class="msg-arq"></h2>
@@ -51,7 +44,6 @@
     </div>
   </div>
 
-  <!-- Banner de WiFi -->
   <div id="banner-wifi" class="bn-wifi">
     <div class="bn-wifi-content">
       <h2 class="bn-wifi-titulo">CONÉCTATE</h2>
@@ -60,7 +52,6 @@
     </div>
   </div>
 
-  <!-- Banner de contacto -->
   <div id="contacto-banner" class="contacto-banner">
     <div class="contacto-content">
       <h2 class="contacto-titulo">CONTACTO</h2>
@@ -71,7 +62,6 @@
     </div>
   </div>
 
-  <!-- Banner para compartir la web -->
   <div id="qrweb-banner" class="bn-wifi">
     <div class="bn-wifi-content">
       <h2 class="bn-wifi-titulo">COMPARTIR WEB</h2>
@@ -80,17 +70,17 @@
     </div>
   </div>
 
-  <!-- Contenedor dinámico para el banner de Términos y Condiciones -->
+  <!-- Contenedor para el banner de Términos y Condiciones -->
   <div id="tyc-container"></div>
-
-  <!--=============== Scripts ===============-->
+  
   <!-- Scripts externos para modularidad -->
-  <script src="js/banner_tyc.js" defer></script>
+  <script src="js/banner_tyc.js"></script>
+  <script src="js/index_ofertas.js"></script>
+  <script src="data/precargar/index.js"></script>
+
   <script src="js/index_banners.js" defer></script>
   <script src="data/links.js" defer></script>
   <script src="data/footer.js" defer></script>
   <script src="data/arquitectura/bienvenida.js" defer></script>
-  <script src="js/index_ofertas.js" defer></script>
-  <script src="data/precargar/index.js" defer></script>
 </body>
 </html>

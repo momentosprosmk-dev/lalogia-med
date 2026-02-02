@@ -31,7 +31,9 @@
 
     "reservar_licor_data": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxE9e4HX11amRop4QF0FArkSShevv2sQRbpFV-va_5Uev-WJtngJBjdo8iEkqPw4AolSnj93A2L-eJ/pub?gid=0&single=true&output=tsv",
     "numero-local": "573202877325",
-    "npersonas": 8
+    "npersonas": 8,
+
+    "tyc_fecha": "2026-01-23"
   };
 
 

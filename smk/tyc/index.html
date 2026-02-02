@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../css/tyc/tyc.css" />
 </head>
 <body>
+  <!-- Contenedor principal con visor del documento TyC -->
   <main class="contenedor">
     <iframe
       src="tyc.html"
@@ -17,6 +18,7 @@
     ></iframe>
   </main>
 
+  <!-- Pie de página con botones de acción -->
   <footer class="footer-fijo">
     <div class="botones-horizontal">
       <div class="btn-wrapper">
@@ -28,9 +30,11 @@
     </div>
   </footer>
 
+  <!-- Script para manejar la aceptación o rechazo de TyC -->
+  <script src="../data/links.js"></script>
   <script>
     document.getElementById("btn-aceptar").addEventListener("click", function() {
-      localStorage.setItem("tyc", "1");
+      localStorage.setItem("tyc", window.tyc_fecha);
       window.location.href = "../../";
     });
 

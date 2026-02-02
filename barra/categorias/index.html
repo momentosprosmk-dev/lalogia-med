@@ -4,30 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ofertas - La Logia</title>
-  <link rel="icon" href="./../../media/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="./../../css/barra/barra.css">
+  <link rel="icon" href="../../media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="../../css/barra/barra.css">
 </head>
 <body>
-
-  <div id="tyc-container"></div>
-
+  <!-- Encabezado principal-->   
   <header>
     <h1>Menú de Ofertas</h1>
     <p>Selecciona una categoría para explorar</p>
   </header>
 
+  <!-- Categorías--> 
   <div class="contenedor-scroll">
     <main class="categorias">
-
       <a href="../ver_carta_completa/" class="categoria">Ver Carta Completa</a>
       <a href="../hookah/" class="categoria">Hookah</a>
-
       <a href="../whisky/" class="categoria">Whisky</a>
       <a href="../tequila/" class="categoria">Tequila</a>
       <a href="../mezcal/" class="categoria">Mezcal</a>
       <a href="../cognac/" class="categoria">Cognac</a>
       <a href="../champagne/" class="categoria">Champagne</a>
- 
       <a href="../ron_premium/" class="categoria">Ron Premium</a>
       <a href="../vodka/" class="categoria">Vodka</a>
       <a href="../ginebra/" class="categoria">Ginebra</a>
@@ -35,18 +31,22 @@
       <a href="../vino_espumoso/" class="categoria">Vino Espumoso</a>
       <a href="../nacional/" class="categoria">Nacional</a>
       <a href="../cocteles/" class="categoria">Cocteles</a>
-
       <a href="../shots/" class="categoria">Shots</a>
       <a href="../bebidas/" class="categoria">Bebidas</a>
     </main>
   </div>
 
+  <!-- Pie de página -->
   <footer class="footer-fijo">
     <a href="../../" class="btn-regresar">⬅ Regresar</a>
   </footer>
 
-  <script src="../js/banner_tyc.js" defer></script>
-  <script src="../../data/precargar/barra.js" defer></script>
+  <!-- Contenedor para el banner de Términos y Condiciones -->
+  <div id="tyc-container"></div>
 
+  <!-- Scripts externos para modularidad -->
+  <script src="../js/banner_tyc.js" defer></script>
+  <script src="../../smk/data/links.js" defer></script>
+  <script src="../../data/precargar/barra.js" defer></script>
 </body>
 </html>
