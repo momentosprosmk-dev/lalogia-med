@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar Sesión - MomentosPro</title>
+  <link rel="icon" href="../smk/media/favicon.ico" type="image/x-icon" />
+  <script src="../data/links.js"></script>
+  <script>
+    window.onload = function() {
+      window.open(window.enlaces["login-link"], "_blank");
+    };
+  </script>
+  <style>
+    :root {
+      --azul-oscuro: #0a1a2f;
+      --gris-claro: #e0e0e0;
+      --negro: #000000;
+    }
+
+    body {
+      background-color: var(--azul-oscuro);
+      color: var(--gris-claro);
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    p {
+      font-size: 1.2rem;
+      text-align: center;
+      border: 2px solid var(--negro);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      background-color: rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <p>Redirigiendo a la página de inicio de sesión de <strong>MomentosPro</strong>...</p>
+</body>
+</html>
+
