@@ -6,6 +6,14 @@
   <title>Momentos - La Logia</title>
   <link rel="icon" href="../media/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="../css/otraswebs/otraswebs.css" />
+  <style>
+  html, body {
+    background-color: #000000;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+  }
+  </style>
 </head>
 <body>
   <!-- Contenido principal con visor de galería -->
@@ -24,63 +32,12 @@
     <a href="../" class="btn-regresar">⬅ Regresar</a>
   </footer>
   
-  <!-- Script de enlaces globales -->
-  <script src="../data/links.js" defer></script>
-
   <!-- Contenedor para el banner de Términos y Condiciones -->
   <div id="tyc-container"></div>
 
-  <!-- Script para cargar dinámicamente el banner TyC -->
-  <script>
-    const basePath = "../";
+  <!-- Scripts externos para modularidad -->
+  <script src="../otraswebs/js/banner_tyc.js"></script>
 
-    // Configuración centralizada del banner TyC
-    window.bannerConfig = {
-      cssRuta: basePath + "smk/css/tyc/banner.css",
-      linkRuta: basePath + "smk/tyc/",
-      rechazarRuta: basePath + "barra/ver_carta_completa/"
-    };
-
-    // Carga dinámica del HTML del banner TyC
-    fetch(basePath + "smk/tyc/banner.html")
-      .then(res => res.text())
-      .then(html => {
-        const container = document.getElementById("tyc-container");
-        if (!container) return;
-        container.innerHTML = html;
-
-        // Inyecta el CSS del banner
-        if (window.bannerConfig.cssRuta) {
-          const css = document.createElement("link");
-          css.rel = "stylesheet";
-          css.href = window.bannerConfig.cssRuta;
-          document.head.appendChild(css);
-        }
-
-        // Inyecta el JS del banner y lo inicializa
-        const script = document.createElement("script");
-        script.src = basePath + "smk/tyc/banner.js";
-        script.onload = () => {
-          if (typeof iniciarBannerTyC === "function") {
-            iniciarBannerTyC();
-          }
-        };
-        document.body.appendChild(script);
-
-        // Ajusta enlace de TyC dentro del banner
-        const linkTyc = container.querySelector("#link-tyc");
-        if (linkTyc) linkTyc.href = window.bannerConfig.linkRuta;
-
-        // Configura acción del botón "rechazar"
-        const btnRechazar = container.querySelector("#btn-rechazar-tyc");
-        if (btnRechazar) {
-          btnRechazar.addEventListener("click", () => {
-            window.location.href = window.bannerConfig.rechazarRuta;
-          });
-        }
-      })
-      // Manejo de errores en consola
-      .catch(err => console.error("Error cargando banner TyC:", err));
-  </script>
+  <script src="../data/links.js" defer></script>
 </body>
 </html>
