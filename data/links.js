@@ -34,8 +34,6 @@
     "numero-local": "573202877325",
     "npersonas": 8,
 
-    "tyc_fecha": "2026-01-23",
-
     "login": "login/",
     "login-link": "https://www.sumiked.com/"
   };

@@ -204,18 +204,30 @@
   <!-- Pie de página -->
   <footer class="footer-links">
     <div class="footer-container">
-      <a id="urlsmk" class="footer-link">Página web</a>
-      <a id="wasmk" class="footer-link">Contactar a EDSE</a>
+      <a id="urlsmk" class="footer-link" target="_blank">Página web</a>
+      <a id="wasmk" class="footer-link" target="_blank">Contactar a EDSE</a>
     </div>
+    <div id="fecha-tyc"></div>
   </footer>
-  
+
   <!-- Scripts externos para modularidad -->
   <script src="../data/links.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // Asignar URLs a los enlaces
+      const enlaceWeb = document.getElementById("urlsmk");
+      const enlaceWhats = document.getElementById("wasmk");
+
+      if (enlaceWeb && window.urlsmk) {
+        enlaceWeb.href = window.urlsmk;
+      }
+      if (enlaceWhats && window.wasmk) {
+        enlaceWhats.href = window.wasmk;
+      }
+
+      // Mostrar fecha TyC si existe
       const fechaElemento = document.getElementById("fecha-tyc");
       if (fechaElemento && window.tyc_fecha) {
-        // Complementa el texto con la fecha centralizada
         fechaElemento.innerHTML = "<strong>Última actualización:</strong> " + window.tyc_fecha;
       }
     });

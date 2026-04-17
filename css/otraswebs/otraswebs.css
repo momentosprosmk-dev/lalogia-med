@@ -65,18 +65,21 @@ iframe.visor::-webkit-scrollbar {
 }
 /* Botón regresar */
 .btn-regresar {
+  flex: 1;
+  max-width: 115px;
+  text-align: center;
   background: #222;
-  color: var(--color-granate);
+  color: #eae5e5;
   padding: 8px 16px;
   border-radius: 6px;
   font-weight: 700;
   text-transform: uppercase;
   text-decoration: none;
-  border: 2px solid var(--color-granate);
+  border: 2px solid #d62828;
   transition: background 0.2s, color 0.2s, transform 0.2s;
 }
 .btn-regresar:hover {
-  background: var(--color-granate);
+  background: #d62828;
   color: #fff;
   transform: scale(1.05);
 }

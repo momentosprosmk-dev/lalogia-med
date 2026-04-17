@@ -2,10 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portal - La Logia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  <title>Ofertas - La Logia</title>
   <link rel="icon" href="media/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/index/index.css">
+  <link rel="stylesheet" href="css/menu/menu.css">
+  <link rel="stylesheet" href="css/menu/banner.css">
   <style>
   html, body {
     background-color: #000000;
@@ -16,78 +18,62 @@
   </style>
 </head>
 <body>
-  <!-- Encabezado con logo principal -->
+  <!-- Encabezado principal-->   
   <header>
-    <img src="media/index_logo.avif" alt="Logo Iluminati" class="logo-img" />
+    <div class="header-info">
+      <h1>Carta</h1>
+    </div>
+    <div class="header-opcion">
+      <button id="btn-opciones" class="btn-opciones">☰</button>
+    </div>
   </header>
 
-  <!-- Botones principales de navegación -->
-  <div class="recuadro">
-    <a id="btn-barra" class="bt-opc" href="#">ofertas</a>
-    <!--<a id="btn-arquitectura" class="bt-opc">explorar templo</a>-->
-    <a id="btn-eventos" class="bt-opc">rituales</a>
-    <a id="btn-momentos" class="bt-opc">momentos</a>
-    <a id="btn-opinion" class="bt-opc">tu opinión</a>
-    <a id="btn-contacto" class="bt-opc">contacto</a>
-    <a id="btn-wifi" class="bt-opc">wi-fi</a>
-    <a id="btn-qrweb" class="bt-opc">compartir Web</a>
+  <!-- Overlay para efecto de transparencia -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Contenedor donde se cargará el menú modular -->
+  <div id="menu-container"></div>
+
+
+  <!-- Contenedor con scroll para menú -->
+  <div class="menu">
+    <div class="menu-inner" id="menu"></div>
   </div>
 
-  <!-- Pie de página -->
-  <footer class="footer">
-    <div class="footer-content">
-      <p id="texto-footer">© La Logia</p>
-    </div>
-  </footer>
+  <!-- Contenedor con scroll para imágenes -->
+  <div class="imagenes-scroll">
+    <div class="imagenes-carta">
+      <img src="media/barra/ver_carta_completa/discotecalalogia.com.1.avif" 
+           alt="Imagen 1" 
+           class="imagen-normal" />
 
-  <!-- Banners dinámicos -->
-  <div id="banner-arquitectura" class="bn-arq">
-    <div class="bn-arq-content">
-      <h2 id="mensaje-arquitectura" class="msg-arq"></h2>
-      <div class="botones-horizontal">
-        <a href="arquitectura/nivel_1/" class="btn-arq">Primer Piso</a>
-        <a href="arquitectura/nivel_2/" class="btn-arq">Segundo Piso</a>
+      <!-- Contenedor con scroll para zoom -->
+      <div class="zoom-container">
+        <img src="media/barra/ver_carta_completa/discotecalalogia.com.2.avif" 
+             alt="Imagen 2 - Zoom" 
+             class="imagen-zoom" />
       </div>
     </div>
   </div>
 
-  <div id="banner-wifi" class="bn-wifi">
-    <div class="bn-wifi-content">
-      <h2 class="bn-wifi-titulo">CONÉCTATE</h2>
-      <img src="media/wifi/wifi.avif" alt="Código QR WiFi" class="qr-img" />
-      <button id="cerrar-wifi" class="btn-bn-cerrar">Cerrar</button>
-    </div>
-  </div>
+  <footer class="footer-fijo">
+    <a href="barra/categorias/" class="btn-regresar">categorías</a>
+    <a href="barra/hookah/" class="btn-regresar">hookah</a>
+  </footer>
 
-  <div id="contacto-banner" class="contacto-banner">
-    <div class="contacto-content">
-      <h2 class="contacto-titulo">CONTACTO</h2>
-      <a id="btn-whatsapp" target="_blank" class="contacto-btn">WhatsApp</a>
-      <a id="btn-instagram" target="_blank" class="contacto-btn">Instagram</a>
-      <a id="btn-facebook" target="_blank" class="contacto-btn">Facebook</a>
-      <button id="cerrar-contacto" class="btn-contacto-cerrar">Cerrar</button>
-    </div>
-  </div>
-
-  <div id="qrweb-banner" class="bn-wifi">
-    <div class="bn-wifi-content">
-      <h2 class="bn-wifi-titulo">COMPARTIR WEB</h2>
-      <img src="media/index_qr.avif" alt="Código QR qrweb" class="qr-img" />
-      <button id="cerrar-qrweb" class="btn-bn-cerrar">Cerrar</button>
-    </div>
-  </div>
 
   <!-- Contenedor para el banner de Términos y Condiciones -->
   <div id="tyc-container"></div>
-  
+
   <!-- Scripts externos para modularidad -->
   <script src="index/js/banner_tyc.js"></script>
-  <script src="index/js/index_ofertas.js"></script>
-  <script src="data/precargar/index.js"></script>
+  <script src="data/links.js"></script>
+  <script>var basePath = "";</script>
 
-  <script src="index/js/index_banners.js" defer></script>
-  <script src="data/links.js" defer></script>
-  <script src="data/footer.js" defer></script>
-  <script src="data/arquitectura/bienvenida.js" defer></script>
+  <!-- Scripts externos para Menu Desplegable -->
+  <script src="menu/menu_loader.js"></script>
+  <script src="menu/modules_menu.js"></script>
+  <script src="menu/banners/banners_loader.js"></script>
+  
 </body>
 </html>

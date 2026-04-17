@@ -15,7 +15,7 @@
     window.bannerConfig = {
       cssRuta: rutaBase + "smk/css/tyc/banner.css",
       linkRuta: rutaBase + "smk/tyc/",
-      rechazarRuta: rutaBase + "barra/ver_carta_completa/"
+      rechazarRuta: rutaBase
     };
 
     // Carga el HTML del banner y lo inserta en el contenedor

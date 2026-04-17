@@ -1,58 +1,53 @@
 /*=============== Banner TyC ===============*/
 .bn-tyc {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  overflow-y: auto;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 .bn-tyc.visible {
   display: flex;
 }
-
 .bn-tyc-content {
-  background: #f9f9f9;
-  padding: 2rem;
+  background: #fff;
+  padding: 0.8rem;
   border-radius: 12px;
   text-align: center;
-  max-width: 95%;
-  width: 95%;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-  border: 1px solid #ccc;
-  /* Fuente más seria y profesional */
-  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  color: #333;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid #ddd;
 }
 
 /* Títulos del banner */
 .bn-tyc-content h2 {
-  font-family: 'Lora', 'Georgia', serif; /* serif elegante para títulos */
+  font-family: 'Lora', 'Georgia', serif;
   color: #222;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 1.2rem;
-  border-bottom: 3px solid #bbb;
+  border-bottom: 2px solid #ddd;
   padding-bottom: 0.6rem;
 }
 
 /* Texto del banner */
 .bn-tyc-content p {
   color: #444;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   font-size: 1.3rem;
   line-height: 1.7;
-  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* Negrita dentro del banner */
 .bn-tyc-content strong {
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: #000;
 }
 
@@ -63,9 +58,8 @@
   color: #0056a3;
   text-decoration: underline;
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   transition: color 0.2s;
-  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 .bn-tyc-content .link-tyc:hover {
   color: #003d73;
@@ -98,7 +92,6 @@
   transition: background 0.2s, color 0.2s, transform 0.2s;
   text-align: center;
   white-space: nowrap;
-  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 .bn-tyc .btn-tyc:hover {
   background: #222;
@@ -106,13 +99,38 @@
   transform: scale(1.05);
 }
 
-/* Responsive solo para el banner */
+/* Botón principal (Acepto) */
+#btn-aceptar-tyc {
+  background: #0056a3;
+  border-color: #004080;
+}
+#btn-aceptar-tyc:hover {
+  background: #004080;
+}
+
+/* Botón secundario (No acepto) */
+#btn-rechazar-tyc {
+  background: #888;
+  border-color: #666;
+}
+#btn-rechazar-tyc:hover {
+  background: #666;
+}
+
+/* Nota aclaratoria */
+.bn-tyc-content .nota {
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+/* Responsive */
 @media (max-width: 480px) {
   .bn-tyc .botones-horizontal {
     gap: 1rem;
   }
   .bn-tyc .btn-tyc {
-    padding: 8px 14px;
-    font-size: 0.9rem;
+    padding: 12px 14px;
+    font-size: 1rem;
   }
 }

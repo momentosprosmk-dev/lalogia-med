@@ -3,30 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ofertas - La Logia</title>
+  <title>Ofertas - Categorías</title>
+
+  <!-- Favicon -->
   <link rel="icon" href="../../media/favicon.ico" type="image/x-icon" />
+
+  <!-- Estilos -->
   <link rel="stylesheet" href="../../css/barra/barra.css">
+  <link rel="stylesheet" href="../../css/menu/menu.css">
+  <link rel="stylesheet" href="../../css/menu/banner.css">
+
   <style>
-  html, body {
-    background-color: #000000;
-    color: #000000;
-    margin: 0;
-    padding: 0;
-  }
+    html, body {
+      background-color: #000;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
   </style>
 </head>
+
 <body>
-  <!-- Encabezado principal-->   
+
+  <!-- Encabezado principal -->
   <header>
-    <h1>Menú de Ofertas</h1>
-    <p>Selecciona una categoría para explorar</p>
+    <div class="header-info">
+      <h1>Categorías</h1>
+      <p>Descubre, selecciona, disfruta</p>
+    </div>
+
+    <div class="header-opcion">
+      <button id="btn-opciones" class="btn-opciones">☰</button>
+    </div>
   </header>
 
-  <!-- Categorías--> 
+  <!-- Overlay del menú -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Contenedor donde se cargará el menú modular -->
+  <div id="menu-container"></div>
+
+  <!-- Categorías -->
   <div class="contenedor-scroll">
     <main class="categorias">
-      <a href="../ver_carta_completa/" class="categoria">Ver Carta Completa</a>
       <a href="../hookah/" class="categoria">Hookah</a>
+      <a href="../cocteles/" class="categoria">Cocteles</a>
       <a href="../whisky/" class="categoria">Whisky</a>
       <a href="../tequila/" class="categoria">Tequila</a>
       <a href="../mezcal/" class="categoria">Mezcal</a>
@@ -37,24 +58,30 @@
       <a href="../ginebra/" class="categoria">Ginebra</a>
       <a href="../bitter/" class="categoria">Bitter</a>
       <a href="../vino_espumoso/" class="categoria">Vino Espumoso</a>
-      <a href="../nacional/" class="categoria">Nacional</a>
-      <a href="../cocteles/" class="categoria">Cocteles</a>
       <a href="../shots/" class="categoria">Shots</a>
+      <a href="../nacional/" class="categoria">Nacional</a>
       <a href="../bebidas/" class="categoria">Bebidas</a>
     </main>
   </div>
 
   <!-- Pie de página -->
   <footer class="footer-fijo">
-    <a href="../../" class="btn-regresar">⬅ Regresar</a>
+    <a href="../../" class="btn-regresar">ver carta completa</a>
   </footer>
 
-  <!-- Contenedor para el banner de Términos y Condiciones -->
+  <!-- Contenedor del banner TyC -->
   <div id="tyc-container"></div>
 
-  <!-- Scripts externos para modularidad -->
+ <!-- Scripts externos para modularidad -->
   <script src="../js/banner_tyc.js" defer></script>
-  <script src="../../smk/data/links.js" defer></script>
+  <script src="../../data/links.js" defer></script>
   <script src="../../data/precargar/barra.js" defer></script>
+  <script>var basePath = "../../";</script>
+
+  <!-- Scripts externos para Menu Desplegable -->
+  <script src="../../menu/menu_loader.js"></script>
+  <script src="../../menu/modules_menu.js"></script>
+  <script src="../../menu/banners/banners_loader.js"></script>
+
 </body>
 </html>
