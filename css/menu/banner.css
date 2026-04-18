@@ -141,8 +141,8 @@
 /* ============================ Banner QR ============================ */
 /* Imagen QR (Wi-Fi y Compartir página) */
 .qr-img {
-  width: 260px;
-  height: 260px;
+  width: 280px;
+  height: 280px;
   margin: 15px auto;
   display: block;
   border-radius: 10px;
