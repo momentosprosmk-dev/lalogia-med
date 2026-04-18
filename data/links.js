@@ -27,7 +27,8 @@
     "cocteles": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1KrtZEOenonnjeQzKLwgiCDL9XO7xNNecHtGjvh2LCatAGjwxUWzNd-z7G2adqA/pub?gid=257007736&single=true&output=tsv",
     "shots": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1KrtZEOenonnjeQzKLwgiCDL9XO7xNNecHtGjvh2LCatAGjwxUWzNd-z7G2adqA/pub?gid=1904472357&single=true&output=tsv",
     "nacional": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1KrtZEOenonnjeQzKLwgiCDL9XO7xNNecHtGjvh2LCatAGjwxUWzNd-z7G2adqA/pub?gid=1757127141&single=true&output=tsv",
-    "bebidas": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1KrtZEOenonnjeQzKLwgiCDL9XO7xNNecHtGjvh2LCatAGjwxUWzNd-z7G2adqA/pub?gid=1623498576&single=true&output=tsv",
+    "cervesa": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1KrtZEOenonnjeQzKLwgiCDL9XO7xNNecHtGjvh2LCatAGjwxUWzNd-z7G2adqA/pub?gid=1623498576&single=true&output=tsv",
+    "acompanantes": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1KrtZEOenonnjeQzKLwgiCDL9XO7xNNecHtGjvh2LCatAGjwxUWzNd-z7G2adqA/pub?gid=1825613541&single=true&output=tsv",
     "vercartacompleta": "",
 
     "reservar_licor_data": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxE9e4HX11amRop4QF0FArkSShevv2sQRbpFV-va_5Uev-WJtngJBjdo8iEkqPw4AolSnj93A2L-eJ/pub?gid=0&single=true&output=tsv",

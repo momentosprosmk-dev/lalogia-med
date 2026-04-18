@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const url = window.enlaces.bebidas;
+  const url = window.enlaces.cervesa;
 
   const clean = (v) => v.replace(/^\s*"?|"?\s*$/g, "").replace(/\r/g, "");
   const formatearPrecio = (valor) => {
